@@ -28,4 +28,3 @@ const ADMIN_CONFIG = {
     // The path to the menu file in the repo
     menuFilePath: "menu.json"
 };
-
