@@ -7,22 +7,22 @@
         {
           "name": "Coco mit Popo",
           "price": "4569.50",
-          "desc": "KichererbsenpÃ¼ree mit Sesam-Paste, OlivenÃ¶l und frischem Fladenbrot."
+          "desc": "KichererbsenpÃÂ¼ree mit Sesam-Paste, OlivenÃÂ¶l und frischem Fladenbrot."
         },
         {
           "name": "Lolo Lala",
           "price": "259.50",
-          "desc": "Knusprig gebackene Kartoffelscheiben mit wÃ¼rzigen GewÃ¼rzen."
+          "desc": "Knusprig gebackene Kartoffelscheiben mit wÃÂ¼rzigen GewÃÂ¼rzen."
         },
         {
-          "name": "Auberginen Pakawra Crunch",
-          "price": "9.50",
+          "name": "Fatihihihihi",
+          "price": "7779.50",
           "desc": "Knusprig gebackene Auberginenscheiben."
         },
         {
           "name": "Bolani Watani Classic",
           "price": "10.90",
-          "desc": "Traditionelles Fladenbrot gefÃ¼llt mit Kartoffeln und KrÃ¤utern."
+          "desc": "Traditionelles Fladenbrot gefÃÂ¼llt mit Kartoffeln und KrÃÂ¤utern."
         },
         {
           "name": "Vegan Lentil Soup",
@@ -38,22 +38,22 @@
         {
           "name": "Chicken Karahi",
           "price": "14.90",
-          "desc": "HÃ¼hnerbruststÃ¼cke zubereitet in einer wÃ¼rzigen, traditionellen Sauce."
+          "desc": "HÃÂ¼hnerbruststÃÂ¼cke zubereitet in einer wÃÂ¼rzigen, traditionellen Sauce."
         },
         {
           "name": "Chicken Dupiaza",
           "price": "14.90",
-          "desc": "HÃ¼hnerfleisch mit viel Zwiebeln und orientalischen GewÃ¼rzen."
+          "desc": "HÃÂ¼hnerfleisch mit viel Zwiebeln und orientalischen GewÃÂ¼rzen."
         },
         {
           "name": "Chicken Biryani",
           "price": "14.90",
-          "desc": "WÃ¼rziger Safranreis mit HÃ¼hnerfleisch und Mandeln."
+          "desc": "WÃÂ¼rziger Safranreis mit HÃÂ¼hnerfleisch und Mandeln."
         },
         {
           "name": "Morgh Karahi",
           "price": "14.90",
-          "desc": "SpezialitÃ¤t des Hauses mit saftigem HÃ¼hnerfleisch."
+          "desc": "SpezialitÃÂ¤t des Hauses mit saftigem HÃÂ¼hnerfleisch."
         }
       ]
     },
@@ -64,7 +64,7 @@
         {
           "name": "Lamm Dupiaza",
           "price": "21.90",
-          "desc": "Zartes Lammfleisch mit Zwiebeln und feinen KrÃ¤utern."
+          "desc": "Zartes Lammfleisch mit Zwiebeln und feinen KrÃÂ¤utern."
         },
         {
           "name": "Lamm Qabeli Palav",
@@ -74,7 +74,7 @@
         {
           "name": "Lamm Biryani",
           "price": "23.90",
-          "desc": "Lammfleisch mit wÃ¼rzigem Safranreis."
+          "desc": "Lammfleisch mit wÃÂ¼rzigem Safranreis."
         }
       ]
     },
@@ -90,7 +90,7 @@
         {
           "name": "Qorme Katchalu",
           "price": "13.90",
-          "desc": "Kartoffeleintopf mit wÃ¼rziger Tomaten-Knoblauchsauce und Safranreis."
+          "desc": "Kartoffeleintopf mit wÃÂ¼rziger Tomaten-Knoblauchsauce und Safranreis."
         },
         {
           "name": "Lentils & Saffron",
@@ -100,23 +100,23 @@
         {
           "name": "Falafel Teller",
           "price": "9.90",
-          "desc": "5 Falafel, Hummus, eingelegtes GemÃ¼se & Naan."
+          "desc": "5 Falafel, Hummus, eingelegtes GemÃÂ¼se & Naan."
         }
       ]
     },
     {
       "id": "spezial",
-      "name": "SpezialitÃ¤ten",
+      "name": "SpezialitÃÂ¤ten",
       "items": [
         {
           "name": "Mantu Teigtaschen",
           "price": "24.90",
-          "desc": "12 hausgemachte gedÃ¤mpfte Teigtaschen mit wÃ¼rziger FleischfÃ¼llung und Joghurtsauce."
+          "desc": "12 hausgemachte gedÃÂ¤mpfte Teigtaschen mit wÃÂ¼rziger FleischfÃÂ¼llung und Joghurtsauce."
         },
         {
           "name": "Mix Kabab",
           "price": "17.90",
-          "desc": "Eine Auswahl unserer besten Grill-SpezialitÃ¤ten."
+          "desc": "Eine Auswahl unserer besten Grill-SpezialitÃÂ¤ten."
         }
       ]
     },
@@ -132,12 +132,12 @@
         {
           "name": "Hausgemachter Safrankuchen",
           "price": "4.90",
-          "desc": "SÃ¼Ãer Kuchen verfeinert mit edlem Safran."
+          "desc": "SÃÂ¼ÃÂer Kuchen verfeinert mit edlem Safran."
         },
         {
           "name": "Baklava",
           "price": "4.90",
-          "desc": "Orientalisches BlÃ¤tterteiggebÃ¤ck mit WalnÃ¼ssen und Pistazien."
+          "desc": "Orientalisches BlÃÂ¤tterteiggebÃÂ¤ck mit WalnÃÂ¼ssen und Pistazien."
         }
       ]
     }
