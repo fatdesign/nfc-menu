@@ -23,9 +23,10 @@ const ADMIN_CONFIG = {
     githubRepo: "shaker-menu",
 
     // The Personal Access Token (PAT) from GitHub
-    githubToken: "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",
+    githubToken: "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",
 
     // The path to the menu file in the repo
     menuFilePath: "menu.json"
 };
+
 
