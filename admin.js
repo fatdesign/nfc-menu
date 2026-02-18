@@ -1,0 +1,291 @@
+// ============================================
+// SHAKER ADMIN - CORE LOGIC
+// ============================================
+
+let menuData = null;
+let currentFileSha = null; // GitHub requires the file's SHA to update it
+
+// ---- DOM References ----
+const loginScreen = document.getElementById('login-screen');
+const dashboardScreen = document.getElementById('dashboard-screen');
+const loginForm = document.getElementById('login-form');
+const loginError = document.getElementById('login-error');
+const saveBtn = document.getElementById('save-btn');
+const saveStatus = document.getElementById('save-status');
+const logoutBtn = document.getElementById('logout-btn');
+const categoriesContainer = document.getElementById('categories-container');
+const addCategoryBtn = document.getElementById('add-category-btn');
+
+// Item Modal
+const itemModal = document.getElementById('item-modal');
+const itemForm = document.getElementById('item-form');
+const modalTitle = document.getElementById('modal-title');
+const modalCancel = document.getElementById('modal-cancel');
+
+// Category Modal
+const catModal = document.getElementById('cat-modal');
+const catForm = document.getElementById('cat-form');
+const catModalCancel = document.getElementById('cat-modal-cancel');
+
+// ---- Authentication ----
+loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const pw = document.getElementById('password').value;
+    if (pw === ADMIN_CONFIG.password) {
+        loginScreen.classList.remove('active');
+        dashboardScreen.classList.add('active');
+        loginError.classList.add('hidden');
+        loadMenu();
+    } else {
+        loginError.classList.remove('hidden');
+        document.getElementById('password').value = '';
+    }
+});
+
+logoutBtn.addEventListener('click', () => {
+    dashboardScreen.classList.remove('active');
+    loginScreen.classList.add('active');
+    document.getElementById('password').value = '';
+});
+
+// ---- Load Menu from GitHub ----
+async function loadMenu() {
+    categoriesContainer.innerHTML = '<p style="text-align:center;color:#888;padding:3rem;">⏳ Verbinde mit GitHub...</p>';
+
+    // Check if config is filled in
+    const isConfigured = ADMIN_CONFIG.githubToken &&
+        ADMIN_CONFIG.githubToken !== 'YOUR_GITHUB_PAT_HERE' &&
+        ADMIN_CONFIG.githubOwner !== 'YOUR_GITHUB_USERNAME' &&
+        ADMIN_CONFIG.githubRepo !== 'YOUR_REPO_NAME';
+
+    if (!isConfigured) {
+        categoriesContainer.innerHTML = `
+            <div style="background:#2a1a1a;border:1px solid #c0392b;border-radius:12px;padding:2rem;text-align:center;color:#e74c3c;">
+                <h3>⚠️ config.js nicht ausgefüllt</h3>
+                <p style="margin-top:0.5rem;color:#888;">Bitte githubOwner, githubRepo und githubToken in admin/config.js eintragen.</p>
+            </div>`;
+        return;
+    }
+
+    try {
+        const url = `https://api.github.com/repos/${ADMIN_CONFIG.githubOwner}/${ADMIN_CONFIG.githubRepo}/contents/${ADMIN_CONFIG.menuFilePath}`;
+        const res = await fetch(url, {
+            headers: {
+                'Authorization': `token ${ADMIN_CONFIG.githubToken}`,
+                'Accept': 'application/vnd.github.v3+json'
+            }
+        });
+
+        if (!res.ok) {
+            const errData = await res.json().catch(() => ({}));
+            const errMsg = errData.message || `HTTP ${res.status}`;
+            throw new Error(`GitHub API: ${errMsg} (Status ${res.status})`);
+        }
+
+        const fileData = await res.json();
+        currentFileSha = fileData.sha;
+        const decoded = atob(fileData.content.replace(/\n/g, ''));
+        menuData = JSON.parse(decoded);
+        categoriesContainer.innerHTML = '';
+        renderDashboard();
+
+    } catch (err) {
+        categoriesContainer.innerHTML = `
+            <div style="background:#2a1a1a;border:1px solid #c0392b;border-radius:12px;padding:2rem;text-align:center;">
+                <h3 style="color:#e74c3c;">❌ Verbindungsfehler</h3>
+                <p style="color:#888;margin-top:0.5rem;">${err.message}</p>
+                <p style="color:#555;font-size:0.8rem;margin-top:1rem;">Prüfe: Token-Berechtigungen, Repo-Name und ob das Repo existiert.</p>
+                <button onclick="loadMenu()" style="margin-top:1rem;padding:0.5rem 1.5rem;background:#D4AF37;color:#000;border:none;border-radius:8px;cursor:pointer;font-weight:700;">🔄 Erneut versuchen</button>
+            </div>`;
+        console.error('GitHub API Error:', err);
+    }
+}
+
+// ---- Render Dashboard ----
+function renderDashboard() {
+    // Clear existing (but keep notice if present)
+    const notice = categoriesContainer.querySelector('.config-notice');
+    categoriesContainer.innerHTML = '';
+    if (notice) categoriesContainer.appendChild(notice);
+
+    menuData.categories.forEach((cat, catIdx) => {
+        const block = document.createElement('div');
+        block.className = 'category-block';
+        block.dataset.catIdx = catIdx;
+
+        block.innerHTML = `
+            <div class="category-header">
+                <span class="category-name">${cat.name}</span>
+                <div class="category-actions">
+                    <button class="btn btn-danger btn-sm delete-cat-btn" data-cat-idx="${catIdx}">🗑 Kategorie löschen</button>
+                </div>
+            </div>
+            <div class="item-list" id="item-list-${catIdx}">
+                ${cat.items.map((item, itemIdx) => renderItemRow(item, catIdx, itemIdx)).join('')}
+            </div>
+            <div class="add-item-row">
+                <button class="btn btn-secondary add-item-btn" data-cat-idx="${catIdx}">+ Gericht hinzufügen</button>
+            </div>
+        `;
+        categoriesContainer.appendChild(block);
+    });
+
+    // Attach events
+    document.querySelectorAll('.add-item-btn').forEach(btn => {
+        btn.addEventListener('click', () => openItemModal(parseInt(btn.dataset.catIdx)));
+    });
+    document.querySelectorAll('.edit-item-btn').forEach(btn => {
+        btn.addEventListener('click', () => openItemModal(parseInt(btn.dataset.catIdx), parseInt(btn.dataset.itemIdx)));
+    });
+    document.querySelectorAll('.delete-item-btn').forEach(btn => {
+        btn.addEventListener('click', () => deleteItem(parseInt(btn.dataset.catIdx), parseInt(btn.dataset.itemIdx)));
+    });
+    document.querySelectorAll('.delete-cat-btn').forEach(btn => {
+        btn.addEventListener('click', () => deleteCategory(parseInt(btn.dataset.catIdx)));
+    });
+}
+
+function renderItemRow(item, catIdx, itemIdx) {
+    return `
+        <div class="item-row">
+            <div class="item-info">
+                <div class="item-row-name">${item.name}</div>
+                ${item.desc ? `<div class="item-row-desc">${item.desc}</div>` : ''}
+            </div>
+            <div class="item-row-price">€ ${item.price}</div>
+            <div class="item-actions">
+                <button class="btn-icon edit-item-btn" data-cat-idx="${catIdx}" data-item-idx="${itemIdx}" title="Bearbeiten">✏️</button>
+                <button class="btn-icon delete delete-item-btn" data-cat-idx="${catIdx}" data-item-idx="${itemIdx}" title="Löschen">🗑</button>
+            </div>
+        </div>
+    `;
+}
+
+// ---- Item Modal ----
+function openItemModal(catIdx, itemIdx = null) {
+    document.getElementById('item-cat-id').value = catIdx;
+    document.getElementById('item-index').value = itemIdx !== null ? itemIdx : '';
+
+    if (itemIdx !== null) {
+        const item = menuData.categories[catIdx].items[itemIdx];
+        modalTitle.textContent = 'Gericht bearbeiten';
+        document.getElementById('item-name').value = item.name;
+        document.getElementById('item-price').value = item.price;
+        document.getElementById('item-desc').value = item.desc || '';
+    } else {
+        modalTitle.textContent = 'Gericht hinzufügen';
+        itemForm.reset();
+    }
+    itemModal.classList.remove('hidden');
+}
+
+modalCancel.addEventListener('click', () => itemModal.classList.add('hidden'));
+itemModal.addEventListener('click', (e) => { if (e.target === itemModal) itemModal.classList.add('hidden'); });
+
+itemForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const catIdx = parseInt(document.getElementById('item-cat-id').value);
+    const itemIdxRaw = document.getElementById('item-index').value;
+    const itemIdx = itemIdxRaw !== '' ? parseInt(itemIdxRaw) : null;
+
+    const newItem = {
+        name: document.getElementById('item-name').value.trim(),
+        price: document.getElementById('item-price').value.trim(),
+        desc: document.getElementById('item-desc').value.trim()
+    };
+
+    if (itemIdx !== null) {
+        menuData.categories[catIdx].items[itemIdx] = newItem;
+    } else {
+        menuData.categories[catIdx].items.push(newItem);
+    }
+
+    itemModal.classList.add('hidden');
+    renderDashboard();
+});
+
+// ---- Delete Item ----
+function deleteItem(catIdx, itemIdx) {
+    if (!confirm(`"${menuData.categories[catIdx].items[itemIdx].name}" wirklich löschen?`)) return;
+    menuData.categories[catIdx].items.splice(itemIdx, 1);
+    renderDashboard();
+}
+
+// ---- Category Modal ----
+addCategoryBtn.addEventListener('click', () => {
+    catForm.reset();
+    catModal.classList.remove('hidden');
+});
+catModalCancel.addEventListener('click', () => catModal.classList.add('hidden'));
+catModal.addEventListener('click', (e) => { if (e.target === catModal) catModal.classList.add('hidden'); });
+
+catForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('cat-name').value.trim();
+    const id = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    menuData.categories.push({ id, name, items: [] });
+    catModal.classList.add('hidden');
+    renderDashboard();
+});
+
+// ---- Delete Category ----
+function deleteCategory(catIdx) {
+    const cat = menuData.categories[catIdx];
+    if (!confirm(`Kategorie "${cat.name}" mit ${cat.items.length} Gerichten wirklich löschen?`)) return;
+    menuData.categories.splice(catIdx, 1);
+    renderDashboard();
+}
+
+// ---- Save to GitHub ----
+saveBtn.addEventListener('click', saveToGitHub);
+
+async function saveToGitHub() {
+    if (!currentFileSha) {
+        setSaveStatus('Kein GitHub-Token konfiguriert.', 'error');
+        return;
+    }
+
+    saveBtn.disabled = true;
+    setSaveStatus('Speichern...', '');
+
+    try {
+        const content = btoa(unescape(encodeURIComponent(JSON.stringify(menuData, null, 2))));
+        const url = `https://api.github.com/repos/${ADMIN_CONFIG.githubOwner}/${ADMIN_CONFIG.githubRepo}/contents/${ADMIN_CONFIG.menuFilePath}`;
+
+        const res = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${ADMIN_CONFIG.githubToken}`,
+                'Accept': 'application/vnd.github.v3+json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                message: 'Admin: Speisekarte aktualisiert',
+                content: content,
+                sha: currentFileSha
+            })
+        });
+
+        if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.message || `HTTP ${res.status}`);
+        }
+
+        const data = await res.json();
+        currentFileSha = data.content.sha; // Update SHA for next save
+        setSaveStatus('✓ Erfolgreich gespeichert!', 'success');
+    } catch (err) {
+        setSaveStatus(`Fehler: ${err.message}`, 'error');
+        console.error(err);
+    } finally {
+        saveBtn.disabled = false;
+    }
+}
+
+function setSaveStatus(msg, type) {
+    saveStatus.textContent = msg;
+    saveStatus.className = 'save-status ' + type;
+    if (type === 'success') {
+        setTimeout(() => { saveStatus.textContent = ''; saveStatus.className = 'save-status'; }, 4000);
+    }
+}
