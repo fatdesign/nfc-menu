@@ -1,0 +1,145 @@
+{
+    "categories": [
+        {
+            "id": "vorspeisen",
+            "name": "Vorspeisen",
+            "items": [
+                {
+                    "name": "Hummus mit Naan",
+                    "price": "9.50",
+                    "desc": "Kichererbsenpüree mit Sesam-Paste, Olivenöl und frischem Fladenbrot."
+                },
+                {
+                    "name": "Potato Pakawra Crunch",
+                    "price": "9.50",
+                    "desc": "Knusprig gebackene Kartoffelscheiben mit würzigen Gewürzen."
+                },
+                {
+                    "name": "Auberginen Pakawra Crunch",
+                    "price": "9.50",
+                    "desc": "Knusprig gebackene Auberginenscheiben."
+                },
+                {
+                    "name": "Bolani Watani Classic",
+                    "price": "10.90",
+                    "desc": "Traditionelles Fladenbrot gefüllt mit Kartoffeln und Kräutern."
+                },
+                {
+                    "name": "Vegan Lentil Soup",
+                    "price": "7.90",
+                    "desc": "Linsensuppe nach hausgemachtem Rezept."
+                }
+            ]
+        },
+        {
+            "id": "hauptspeisen-huhn",
+            "name": "Hauptgerichte Huhn",
+            "items": [
+                {
+                    "name": "Chicken Karahi",
+                    "price": "14.90",
+                    "desc": "Hühnerbruststücke zubereitet in einer würzigen, traditionellen Sauce."
+                },
+                {
+                    "name": "Chicken Dupiaza",
+                    "price": "14.90",
+                    "desc": "Hühnerfleisch mit viel Zwiebeln und orientalischen Gewürzen."
+                },
+                {
+                    "name": "Chicken Biryani",
+                    "price": "14.90",
+                    "desc": "Würziger Safranreis mit Hühnerfleisch und Mandeln."
+                },
+                {
+                    "name": "Morgh Karahi",
+                    "price": "14.90",
+                    "desc": "Spezialität des Hauses mit saftigem Hühnerfleisch."
+                }
+            ]
+        },
+        {
+            "id": "hauptspeisen-lamm",
+            "name": "Hauptgerichte Lamm",
+            "items": [
+                {
+                    "name": "Lamm Dupiaza",
+                    "price": "21.90",
+                    "desc": "Zartes Lammfleisch mit Zwiebeln und feinen Kräutern."
+                },
+                {
+                    "name": "Lamm Qabeli Palav",
+                    "price": "24.90",
+                    "desc": "Traditioneller Reis mit Lammfleisch, Karotten und Rosinen."
+                },
+                {
+                    "name": "Lamm Biryani",
+                    "price": "23.90",
+                    "desc": "Lammfleisch mit würzigem Safranreis."
+                }
+            ]
+        },
+        {
+            "id": "veggie",
+            "name": "Vegetarisch & Vegan",
+            "items": [
+                {
+                    "name": "Borani Banjan",
+                    "price": "17.90",
+                    "desc": "Gebratene Auberginen mit Tomaten, Zwiebeln, Knoblauch und Minzsauce, serviert mit Naan."
+                },
+                {
+                    "name": "Qorme Katchalu",
+                    "price": "13.90",
+                    "desc": "Kartoffeleintopf mit würziger Tomaten-Knoblauchsauce und Safranreis."
+                },
+                {
+                    "name": "Lentils & Saffron",
+                    "price": "11.90",
+                    "desc": "Linseneintopf fein abgestimmt mit Safran."
+                },
+                {
+                    "name": "Falafel Teller",
+                    "price": "9.90",
+                    "desc": "5 Falafel, Hummus, eingelegtes Gemüse & Naan."
+                }
+            ]
+        },
+        {
+            "id": "spezial",
+            "name": "Spezialitäten",
+            "items": [
+                {
+                    "name": "Mantu Teigtaschen",
+                    "price": "24.90",
+                    "desc": "12 hausgemachte gedämpfte Teigtaschen mit würziger Fleischfüllung und Joghurtsauce."
+                },
+                {
+                    "name": "Mix Kabab",
+                    "price": "17.90",
+                    "desc": "Eine Auswahl unserer besten Grill-Spezialitäten."
+                }
+            ]
+        },
+        {
+            "id": "desserts",
+            "name": "Desserts",
+            "items": [
+                {
+                    "name": "Pistazien Ferni",
+                    "price": "4.90",
+                    "desc": "Kardamom-Vanille Pudding mit Pistazien und Mandeln."
+                },
+                {
+                    "name": "Hausgemachter Safrankuchen",
+                    "price": "4.90",
+                    "desc": "Süßer Kuchen verfeinert mit edlem Safran."
+                },
+                {
+                    "name": "Baklava",
+                    "price": "4.90",
+                    "desc": "Orientalisches Blätterteiggebäck mit Walnüssen und Pistazien."
+                }
+            ]
+        }
+    ]
+}

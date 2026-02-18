@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shaker Restaurant | Digitale Speisekarte</title>
+    <meta name="description" content="Persische Kochkunst in Salzburg. Entdecken Sie unsere Spezialitäten digital.">
+    <!-- Favicon would go here -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation Overlay / Header -->
+    <header class="main-header glass animate-fade-in">
+        <div class="container header-content">
+            <div class="brand">
+                <span class="gold-text">SHAKER</span> RESTAURANT
+            </div>
+            <!-- Desktop Nav -->
+            <nav class="category-nav desktop-only">
+                <ul id="category-list">
+                    <!-- Categories will be injected here -->
+                </ul>
+            </nav>
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-toggle" class="mobile-only" aria-label="Menu öffnen">
+                <span class="menu-label gold-text">MENÜ</span>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Overlay -->
+    <div id="mobile-menu-overlay" class="mobile-only glass">
+        <button id="close-mobile-menu" aria-label="Menu schließen">✕</button>
+        <div class="mobile-nav-content">
+            <div class="mobile-brand">
+                <span class="gold-text">SHAKER</span>
+            </div>
+            <ul id="mobile-category-list">
+                <!-- Mobile Categories will be injected here -->
+            </ul>
+        </div>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero animate-fade-in">
+            <div class="hero-overlay"></div>
+            <div class="container hero-content">
+                <h1 class="hero-title">Shaker Restaurant</h1>
+                <p class="hero-subtitle">Persische Kochkunst & Gastfreundschaft</p>
+                <div class="hero-decoration">
+                    <span class="line"></span>
+                    <span class="icon">❈</span>
+                    <span class="line"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Menu Container -->
+        <div id="menu-app" class="container section-padding">
+            <!-- Categories and Items will be dynamically rendered or structured here -->
+        </div>
+    </main>
+
+    <footer class="glass">
+        <div class="container footer-content">
+            <p>&copy; 2026 Shaker Restaurant Salzburg</p>
+            <p class="nfc-tagline">Scan via NFC for the digital menu</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
