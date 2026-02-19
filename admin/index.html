@@ -57,23 +57,67 @@
 
     <!-- Modal: Add/Edit Item -->
     <div id="item-modal" class="modal-overlay hidden">
-        <div class="modal-card">
+        <div class="modal-card modal-large">
             <h2 class="modal-title" id="modal-title">Gericht hinzufügen</h2>
             <form id="item-form">
                 <input type="hidden" id="item-cat-id">
                 <input type="hidden" id="item-index">
-                <div class="form-group">
-                    <label for="item-name">Name</label>
-                    <input type="text" id="item-name" placeholder="z.B. Chicken Karahi" required>
+
+                <div class="modal-grid">
+                    <div class="modal-col">
+                        <div class="lang-tag">DEUTSCH</div>
+                        <div class="form-group">
+                            <label>Name (DE)</label>
+                            <input type="text" id="item-name-de" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Beschreibung (DE)</label>
+                            <textarea id="item-desc-de" rows="2"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-col">
+                        <div class="lang-tag">ENGLISH</div>
+                        <div class="form-group">
+                            <label>Name (EN)</label>
+                            <input type="text" id="item-name-en">
+                        </div>
+                        <div class="form-group">
+                            <label>Beschreibung (EN)</label>
+                            <textarea id="item-desc-en" rows="2"></textarea>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="modal-grid">
+                    <div class="modal-col">
+                        <div class="lang-tag">TÜRKÇE</div>
+                        <div class="form-group">
+                            <label>Name (TR)</label>
+                            <input type="text" id="item-name-tr">
+                        </div>
+                        <div class="form-group">
+                            <label>Beschreibung (TR)</label>
+                            <textarea id="item-desc-tr" rows="2"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-col">
+                        <div class="lang-tag">ESPAÑOL</div>
+                        <div class="form-group">
+                            <label>Name (ES)</label>
+                            <input type="text" id="item-name-es">
+                        </div>
+                        <div class="form-group">
+                            <label>Beschreibung (ES)</label>
+                            <textarea id="item-desc-es" rows="2"></textarea>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label for="item-price">Preis (€)</label>
                     <input type="text" id="item-price" placeholder="z.B. 14.90" required>
                 </div>
-                <div class="form-group">
-                    <label for="item-desc">Beschreibung</label>
-                    <textarea id="item-desc" rows="3" placeholder="Kurze Beschreibung des Gerichts..."></textarea>
-                </div>
+
                 <div class="modal-actions">
                     <button type="button" id="modal-cancel" class="btn btn-ghost">Abbrechen</button>
                     <button type="submit" class="btn btn-primary">Speichern</button>
@@ -88,8 +132,20 @@
             <h2 class="modal-title">Kategorie hinzufügen</h2>
             <form id="cat-form">
                 <div class="form-group">
-                    <label for="cat-name">Kategoriename</label>
-                    <input type="text" id="cat-name" placeholder="z.B. Grillspezialitäten" required>
+                    <label>Kategoriename (DE)</label>
+                    <input type="text" id="cat-name-de" required>
+                </div>
+                <div class="form-group">
+                    <label>Kategoriename (EN)</label>
+                    <input type="text" id="cat-name-en">
+                </div>
+                <div class="form-group">
+                    <label>Kategoriename (TR)</label>
+                    <input type="text" id="cat-name-tr">
+                </div>
+                <div class="form-group">
+                    <label>Kategoriename (ES)</label>
+                    <input type="text" id="cat-name-es">
                 </div>
                 <div class="modal-actions">
                     <button type="button" id="cat-modal-cancel" class="btn btn-ghost">Abbrechen</button>

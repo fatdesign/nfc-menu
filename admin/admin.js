@@ -100,7 +100,7 @@ async function loadMenu() {
 function showConfigNotice() {
     const notice = document.createElement('div');
     notice.className = 'config-notice';
-    notice.innerHTML = '⚠️ <strong>Lokaler Modus:</strong> Proxy nicht konfiguriert. Änderungen werden nicht gespeichert. Bitte <code>proxyUrl</code> in <code>admin/config.js</code> eintragen und <code>proxy.php</code> auf deinen Server hochladen.';
+    notice.innerHTML = '⚠️ <strong>Lokaler Modus:</strong> Cloudflare Worker nicht konfiguriert. Änderungen werden nicht gespeichert. Bitte <code>proxyUrl</code> in <code>admin/config.js</code> mit deiner Worker-URL befüllen.';
     categoriesContainer.appendChild(notice);
 }
 
@@ -113,10 +113,15 @@ function renderDashboard() {
     menuData.categories.forEach((cat, catIdx) => {
         const block = document.createElement('div');
         block.className = 'category-block';
+
+        // Admin view always uses German as primary label
+        const catName = cat.name['de'] || 'N/A';
+
         block.innerHTML = `
             <div class="category-header">
-                <span class="category-name">${cat.name}</span>
+                <span class="category-name">${catName}</span>
                 <div class="category-actions">
+                    <button class="btn btn-ghost btn-sm edit-cat-btn" data-cat-idx="${catIdx}">✏️ Umbenennen</button>
                     <button class="btn btn-danger btn-sm delete-cat-btn" data-cat-idx="${catIdx}">🗑 Kategorie löschen</button>
                 </div>
             </div>
@@ -138,14 +143,18 @@ function renderDashboard() {
         btn.addEventListener('click', () => deleteItem(parseInt(btn.dataset.catIdx), parseInt(btn.dataset.itemIdx))));
     document.querySelectorAll('.delete-cat-btn').forEach(btn =>
         btn.addEventListener('click', () => deleteCategory(parseInt(btn.dataset.catIdx))));
+    document.querySelectorAll('.edit-cat-btn').forEach(btn =>
+        btn.addEventListener('click', () => openCatModal(parseInt(btn.dataset.catIdx))));
 }
 
 function renderItemRow(item, catIdx, itemIdx) {
+    const name = item.name['de'] || 'N/A';
+    const desc = item.desc ? item.desc['de'] : '';
     return `
         <div class="item-row">
             <div class="item-info">
-                <div class="item-row-name">${item.name}</div>
-                ${item.desc ? `<div class="item-row-desc">${item.desc}</div>` : ''}
+                <div class="item-row-name">${name}</div>
+                ${desc ? `<div class="item-row-desc">${desc}</div>` : ''}
             </div>
             <div class="item-row-price">€ ${item.price}</div>
             <div class="item-actions">
@@ -159,12 +168,19 @@ function renderItemRow(item, catIdx, itemIdx) {
 function openItemModal(catIdx, itemIdx = null) {
     document.getElementById('item-cat-id').value = catIdx;
     document.getElementById('item-index').value = itemIdx !== null ? itemIdx : '';
+
     if (itemIdx !== null) {
         const item = menuData.categories[catIdx].items[itemIdx];
         modalTitle.textContent = 'Gericht bearbeiten';
-        document.getElementById('item-name').value = item.name;
+        document.getElementById('item-name-de').value = item.name['de'] || '';
+        document.getElementById('item-name-en').value = item.name['en'] || '';
+        document.getElementById('item-name-tr').value = item.name['tr'] || '';
+        document.getElementById('item-name-es').value = item.name['es'] || '';
+        document.getElementById('item-desc-de').value = item.desc ? (item.desc['de'] || '') : '';
+        document.getElementById('item-desc-en').value = item.desc ? (item.desc['en'] || '') : '';
+        document.getElementById('item-desc-tr').value = item.desc ? (item.desc['tr'] || '') : '';
+        document.getElementById('item-desc-es').value = item.desc ? (item.desc['es'] || '') : '';
         document.getElementById('item-price').value = item.price;
-        document.getElementById('item-desc').value = item.desc || '';
     } else {
         modalTitle.textContent = 'Gericht hinzufügen';
         itemForm.reset();
@@ -180,11 +196,23 @@ itemForm.addEventListener('submit', (e) => {
     const catIdx = parseInt(document.getElementById('item-cat-id').value);
     const rawIdx = document.getElementById('item-index').value;
     const itemIdx = rawIdx !== '' ? parseInt(rawIdx) : null;
+
     const newItem = {
-        name: document.getElementById('item-name').value.trim(),
+        name: {
+            de: document.getElementById('item-name-de').value.trim(),
+            en: document.getElementById('item-name-en').value.trim(),
+            tr: document.getElementById('item-name-tr').value.trim(),
+            es: document.getElementById('item-name-es').value.trim()
+        },
         price: document.getElementById('item-price').value.trim(),
-        desc: document.getElementById('item-desc').value.trim(),
+        desc: {
+            de: document.getElementById('item-desc-de').value.trim(),
+            en: document.getElementById('item-desc-en').value.trim(),
+            tr: document.getElementById('item-desc-tr').value.trim(),
+            es: document.getElementById('item-desc-es').value.trim()
+        }
     };
+
     if (itemIdx !== null) {
         menuData.categories[catIdx].items[itemIdx] = newItem;
     } else {
@@ -195,21 +223,48 @@ itemForm.addEventListener('submit', (e) => {
 });
 
 function deleteItem(catIdx, itemIdx) {
-    if (!confirm(`"${menuData.categories[catIdx].items[itemIdx].name}" wirklich löschen?`)) return;
+    if (!confirm(`"${menuData.categories[catIdx].items[itemIdx].name['de']}" wirklich löschen?`)) return;
     menuData.categories[catIdx].items.splice(itemIdx, 1);
     renderDashboard();
 }
 
 // ---- Category Modal ----
-addCategoryBtn.addEventListener('click', () => { catForm.reset(); catModal.classList.remove('hidden'); });
+let editingCatIdx = null;
+
+function openCatModal(catIdx = null) {
+    editingCatIdx = catIdx;
+    catForm.reset();
+    if (catIdx !== null) {
+        const cat = menuData.categories[catIdx];
+        document.getElementById('cat-name-de').value = cat.name['de'] || '';
+        document.getElementById('cat-name-en').value = cat.name['en'] || '';
+        document.getElementById('cat-name-tr').value = cat.name['tr'] || '';
+        document.getElementById('cat-name-es').value = cat.name['es'] || '';
+    }
+    catModal.classList.remove('hidden');
+}
+
+addCategoryBtn.addEventListener('click', () => openCatModal());
 catModalCancel.addEventListener('click', () => catModal.classList.add('hidden'));
 catModal.addEventListener('click', (e) => { if (e.target === catModal) catModal.classList.add('hidden'); });
 
 catForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const name = document.getElementById('cat-name').value.trim();
-    const id = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-    menuData.categories.push({ id, name, items: [] });
+    const nameDe = document.getElementById('cat-name-de').value.trim();
+    const nameData = {
+        de: nameDe,
+        en: document.getElementById('cat-name-en').value.trim(),
+        tr: document.getElementById('cat-name-tr').value.trim(),
+        es: document.getElementById('cat-name-es').value.trim()
+    };
+
+    if (editingCatIdx !== null) {
+        menuData.categories[editingCatIdx].name = nameData;
+    } else {
+        const id = nameDe.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+        menuData.categories.push({ id, name: nameData, items: [] });
+    }
+
     catModal.classList.add('hidden');
     renderDashboard();
 });

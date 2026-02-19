@@ -6,7 +6,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const closeMobileMenu = document.getElementById('close-mobile-menu');
 
-    // Fetch menu data from JSON file
+    // Language State
+    let currentLang = localStorage.getItem('shaker_lang') || 'de';
+
+    // Fetch menu data
     let menuData;
     try {
         const res = await fetch('./menu.json');
@@ -16,42 +19,64 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
-    // Render Categories in both Navs
-    menuData.categories.forEach((cat, index) => {
-        // Desktop Nav
-        const li = document.createElement('li');
-        li.innerHTML = `<a href="#${cat.id}">${cat.name}</a>`;
-        categoryList.appendChild(li);
+    const renderMenu = (lang) => {
+        // Clear existing
+        menuApp.innerHTML = '';
+        categoryList.innerHTML = '';
+        mobileCategoryList.innerHTML = '';
 
-        // Mobile Nav
-        const mLi = document.createElement('li');
-        mLi.innerHTML = `<a href="#${cat.id}">${cat.name}</a>`;
-        mobileCategoryList.appendChild(mLi);
+        menuData.categories.forEach((cat, index) => {
+            const catName = cat.name[lang] || cat.name['de'];
 
-        // Render Menu Sections
-        const section = document.createElement('section');
-        section.id = cat.id;
-        section.className = 'menu-section';
+            // Desktop Nav
+            const li = document.createElement('li');
+            li.innerHTML = `<a href="#${cat.id}">${catName}</a>`;
+            categoryList.appendChild(li);
 
-        let itemsHtml = '';
-        cat.items.forEach((item, itemIdx) => {
-            itemsHtml += `
-                <div class="menu-item visible" style="animation-delay: ${(itemIdx * 0.1)}s">
-                    <div class="item-header">
-                        <span class="item-name">${item.name}</span>
-                        <span class="item-price">€ ${item.price}</span>
+            // Mobile Nav
+            const mLi = document.createElement('li');
+            mLi.innerHTML = `<a href="#${cat.id}">${catName}</a>`;
+            mobileCategoryList.appendChild(mLi);
+
+            // Render Sections
+            const section = document.createElement('section');
+            section.id = cat.id;
+            section.className = 'menu-section';
+
+            let itemsHtml = '';
+            cat.items.forEach((item, itemIdx) => {
+                const itemName = item.name[lang] || item.name['de'];
+                const itemDesc = item.desc ? (item.desc[lang] || item.desc['de']) : '';
+
+                itemsHtml += `
+                    <div class="menu-item visible" style="animation-delay: ${(itemIdx * 0.1)}s">
+                        <div class="item-header">
+                            <span class="item-name">${itemName}</span>
+                            <span class="item-price">€ ${item.price}</span>
+                        </div>
+                        ${itemDesc ? `<p class="item-desc">${itemDesc}</p>` : ''}
                     </div>
-                    ${item.desc ? `<p class="item-desc">${item.desc}</p>` : ''}
-                </div>
+                `;
+            });
+
+            section.innerHTML = `
+                <h2 class="section-title">${catName}</h2>
+                <div class="items-grid">${itemsHtml}</div>
             `;
+            menuApp.appendChild(section);
         });
 
-        section.innerHTML = `
-            <h2 class="section-title">${cat.name}</h2>
-            <div class="items-grid">${itemsHtml}</div>
-        `;
-        menuApp.appendChild(section);
-    });
+        // Update Observer targets
+        document.querySelectorAll('.menu-section').forEach(s => observer.observe(s));
+
+        // Re-attach smooth scroll listeners
+        attachSmoothScroll();
+
+        // Update active class on lang buttons
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.lang === lang);
+        });
+    };
 
     // Mobile Menu Toggling
     const toggleMenu = (show) => {
@@ -63,7 +88,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (mobileMenuToggle) mobileMenuToggle.addEventListener('click', () => toggleMenu(true));
     if (closeMobileMenu) closeMobileMenu.addEventListener('click', () => toggleMenu(false));
 
-    // Active Category Highlighting
+    // Observer setup
     const observerOptions = { root: null, rootMargin: '-20% 0px -70% 0px', threshold: 0 };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -79,19 +104,31 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }, observerOptions);
 
-    document.querySelectorAll('.menu-section').forEach(s => observer.observe(s));
-
-    // Smooth Scrolling for all nav links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetElement = document.querySelector(this.getAttribute('href'));
-            const headerHeight = document.querySelector('.main-header').offsetHeight;
-            toggleMenu(false);
-            window.scrollTo({
-                top: targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20,
-                behavior: 'smooth'
+    const attachSmoothScroll = () => {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetElement = document.querySelector(this.getAttribute('href'));
+                if (!targetElement) return;
+                const headerHeight = document.querySelector('.main-header').offsetHeight;
+                toggleMenu(false);
+                window.scrollTo({
+                    top: targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20,
+                    behavior: 'smooth'
+                });
             });
         });
+    };
+
+    // Lang Switcher Logic
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            currentLang = btn.dataset.lang;
+            localStorage.setItem('shaker_lang', currentLang);
+            renderMenu(currentLang);
+        });
     });
+
+    // Initial Render
+    renderMenu(currentLang);
 });

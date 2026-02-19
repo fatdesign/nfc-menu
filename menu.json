@@ -1,161 +1,385 @@
 {
-  "categories": [
-    {
-      "id": "vorspeisen",
-      "name": "Vorspeisen",
-      "items": [
+    "categories": [
         {
-          "name": "Hummus mit Naan",
-          "price": "9.50",
-          "desc": "Kichererbsenpüree mit Sesam-Paste, Olivenöl und frischem Fladenbrot."
+            "id": "vorspeisen",
+            "name": {
+                "de": "Vorspeisen",
+                "en": "Starters",
+                "tr": "Mezeler",
+                "es": "Entrantes"
+            },
+            "items": [
+                {
+                    "name": {
+                        "de": "Hummus mit Naan",
+                        "en": "Hummus with Naan",
+                        "tr": "Naan ile Humus",
+                        "es": "Hummus con Naan"
+                    },
+                    "price": "9.50",
+                    "desc": {
+                        "de": "Kichererbsenpüree mit Sesam-Paste, Olivenöl und frischem Fladenbrot.",
+                        "en": "Chickpea puree with sesame paste, olive oil and fresh flatbread.",
+                        "tr": "Susam ezmesi, zeytinyağı ve taze düz ekmek ile nohut püresi.",
+                        "es": "Puré de garbanzos con pasta de sésamo, aceite de oliva und pan plano fresco."
+                    }
+                },
+                {
+                    "name": {
+                        "de": "Potato Pakawra Crunch",
+                        "en": "Potato Pakawra Crunch",
+                        "tr": "Patates Pakawra Kıtır",
+                        "es": "Crujiente de Patata Pakawra"
+                    },
+                    "price": "9.50",
+                    "desc": {
+                        "de": "Knusprig gebackene Kartoffelscheiben mit würzigen Gewürzen.",
+                        "en": "Crispy baked potato slices with aromatic spices.",
+                        "tr": "Baharatlı ve fırınlanmış kıtır patates dilimleri.",
+                        "es": "Rodajas de patata al horno crujientes con especias aromáticas."
+                    }
+                },
+                {
+                    "name": {
+                        "de": "Auberginen Pakawra Crunch",
+                        "en": "Eggplant Pakawra Crunch",
+                        "tr": "Patlıcan Pakawra Kıtır",
+                        "es": "Crujiente de Berenjena Pakawra"
+                    },
+                    "price": "9.50",
+                    "desc": {
+                        "de": "Knusprig gebackene Auberginenscheiben.",
+                        "en": "Crispy baked eggplant slices.",
+                        "tr": "Fırınlanmış kıtır patlıcan dilimleri.",
+                        "es": "Rodajas de berenjena al horno crujientes."
+                    }
+                },
+                {
+                    "name": {
+                        "de": "Bolani Watani Classic",
+                        "en": "Bolani Watani Classic",
+                        "tr": "Bolani Watani Klasik",
+                        "es": "Bolani Watani Clásico"
+                    },
+                    "price": "10.90",
+                    "desc": {
+                        "de": "Traditionelles Fladenbrot gefüllt mit Kartoffeln und Kräutern.",
+                        "en": "Traditional flatbread filled with potatoes and herbs.",
+                        "tr": "Patates ve otlar ile doldurulmuş geleneksel düz ekmek.",
+                        "es": "Pan plano tradicional relleno de patatas y hierbas."
+                    }
+                },
+                {
+                    "name": {
+                        "de": "Vegan Lentil Soup",
+                        "en": "Vegan Lentil Soup",
+                        "tr": "Vegan Mercimek Çorbası",
+                        "es": "Sopa de Lentejas Vegana"
+                    },
+                    "price": "7.90",
+                    "desc": {
+                        "de": "Linsensuppe nach hausgemachtem Rezept.",
+                        "en": "Homemade recipe lentil soup.",
+                        "tr": "Ev yapımı tarifli mercimek çorbası.",
+                        "es": "Sopa de lentejas según receta casera."
+                    }
+                }
+            ]
         },
         {
-          "name": "Potato Pakawra Crunch",
-          "price": "9.50",
-          "desc": "Knusprig gebackene Kartoffelscheiben mit würzigen Gewürzen."
+            "id": "hauptspeisen-huhn",
+            "name": {
+                "de": "Hauptgerichte Huhn",
+                "en": "Chicken Main Courses",
+                "tr": "Tavuk Ana Yemekler",
+                "es": "Platos Principales de Pollo"
+            },
+            "items": [
+                {
+                    "name": {
+                        "de": "Chicken Karahi",
+                        "en": "Chicken Karahi",
+                        "tr": "Tavuk Karahi",
+                        "es": "Pollo Karahi"
+                    },
+                    "price": "14.90",
+                    "desc": {
+                        "de": "Hühnerbruststücke zubereitet in einer würzigen, traditionellen Sauce.",
+                        "en": "Chicken breast pieces prepared in a spicy, traditional sauce.",
+                        "tr": "Baharatlı, geleneksel sosta hazırlanmış tavuk göğsü parçaları.",
+                        "es": "Trozos de pechuga de pollo preparados en una salsa picante tradicional."
+                    }
+                },
+                {
+                    "name": {
+                        "de": "Chicken Dupiaza",
+                        "en": "Chicken Dupiaza",
+                        "tr": "Tavuk Dupiaza",
+                        "es": "Pollo Dupiaza"
+                    },
+                    "price": "14.90",
+                    "desc": {
+                        "de": "Hühnerfleisch mit viel Zwiebeln und orientalischen Gewürzen.",
+                        "en": "Chicken meat with plenty of onions and oriental spices.",
+                        "tr": "Bol soğan ve oryantal baharatlar ile tavuk eti.",
+                        "es": "Carne de pollo con mucha cebolla y especias orientales."
+                    }
+                },
+                {
+                    "name": {
+                        "de": "Chicken Biryani",
+                        "en": "Chicken Biryani",
+                        "tr": "Tavuk Biryani",
+                        "es": "Pollo Biryani"
+                    },
+                    "price": "14.90",
+                    "desc": {
+                        "de": "Würziger Safranreis mit Hühnerfleisch und Mandeln.",
+                        "en": "Spicy saffron rice with chicken and almonds.",
+                        "tr": "Tavuk ve badem ile baharatlı safran pirinci.",
+                        "es": "Arroz con azafrán picante con pollo y almendras."
+                    }
+                },
+                {
+                    "name": {
+                        "de": "Morgh Karahi",
+                        "en": "Morgh Karahi",
+                        "tr": "Morgh Karahi",
+                        "es": "Morgh Karahi"
+                    },
+                    "price": "14.90",
+                    "desc": {
+                        "de": "Spezialität des Hauses mit saftigem Hühnerfleisch.",
+                        "en": "House specialty with juicy chicken meat.",
+                        "tr": "Sulu tavuk eti ile evin spesiyali.",
+                        "es": "Especialidad de la casa con jugosa carne de pollo."
+                    }
+                }
+            ]
         },
         {
-          "name": "Auberginen Pakawra Crunch",
-          "price": "9.50",
-          "desc": "Knusprig gebackene Auberginenscheiben."
+            "id": "hauptspeisen-lamm",
+            "name": {
+                "de": "Hauptgerichte Lamm",
+                "en": "Lamb Main Courses",
+                "tr": "Kuzu Ana Yemekler",
+                "es": "Platos Principales de Cordero"
+            },
+            "items": [
+                {
+                    "name": {
+                        "de": "Lamm Dupiaza",
+                        "en": "Lamb Dupiaza",
+                        "tr": "Kuzu Dupiaza",
+                        "es": "Cordero Dupiaza"
+                    },
+                    "price": "21.90",
+                    "desc": {
+                        "de": "Zartes Lammfleisch mit Zwiebeln und feinen Kräutern.",
+                        "en": "Tender lamb meat with onions and fine herbs.",
+                        "tr": "Soğan ve ince otlar ile taze kuzu eti.",
+                        "es": "Carne de cordero tierna con cebolla y hierbas finas."
+                    }
+                },
+                {
+                    "name": {
+                        "de": "Lamm Qabeli Palav",
+                        "en": "Lamb Qabeli Palav",
+                        "tr": "Kuzu Qabeli Palav",
+                        "es": "Cordero Qabeli Palav"
+                    },
+                    "price": "24.90",
+                    "desc": {
+                        "de": "Traditioneller Reis mit Lammfleisch, Karotten und Rosinen.",
+                        "en": "Traditional rice with lamb, carrots and raisins.",
+                        "tr": "Kuzu eti, havuç ve kuru üzüm ile geleneksel pirinç.",
+                        "es": "Arroz tradicional con cordero, zanahorias y pasas."
+                    }
+                },
+                {
+                    "name": {
+                        "de": "Lamm Biryani",
+                        "en": "Lamb Biryani",
+                        "tr": "Kuzu Biryani",
+                        "es": "Cordero Biryani"
+                    },
+                    "price": "23.90",
+                    "desc": {
+                        "de": "Lammfleisch mit würzigem Safranreis.",
+                        "en": "Lamb meat with spicy saffron rice.",
+                        "tr": "Baharatlı safran pirinci ile kuzu eti.",
+                        "es": "Carne de cordero mit arroz con azafrán picante."
+                    }
+                }
+            ]
         },
         {
-          "name": "Bolani Watani Classic",
-          "price": "10.90",
-          "desc": "Traditionelles Fladenbrot gefüllt mit Kartoffeln und Kräutern."
+            "id": "veggie",
+            "name": {
+                "de": "Vegetarisch & Vegan",
+                "en": "Vegetarian & Vegan",
+                "tr": "Vejetaryen ve Vegan",
+                "es": "Vegetariano y Vegano"
+            },
+            "items": [
+                {
+                    "name": {
+                        "de": "Borani Banjan",
+                        "en": "Borani Banjan",
+                        "tr": "Borani Banjan",
+                        "es": "Borani Banjan"
+                    },
+                    "price": "17.90",
+                    "desc": {
+                        "de": "Gebratene Auberginen mit Tomaten, Zwiebeln, Knoblauch und Minzsauce, serviert mit Naan.",
+                        "en": "Fried eggplants with tomatoes, onions, garlic and mint sauce, served with naan.",
+                        "tr": "Naan ile servis edilen domates, soğan, sarımsak ve nane soslu kızarmış patlıcan.",
+                        "es": "Berenjenas fritas con tomates, cebollas, ajo y salsa de menta, servidas con naan."
+                    }
+                },
+                {
+                    "name": {
+                        "de": "Qorme Katchalu",
+                        "en": "Qorme Katchalu",
+                        "tr": "Qorme Katchalu",
+                        "es": "Qorme Katchalu"
+                    },
+                    "price": "13.90",
+                    "desc": {
+                        "de": "Kartoffeleintopf mit würziger Tomaten-Knoblauchsauce und Safranreis.",
+                        "en": "Potato stew with spicy tomato-garlic sauce and saffron rice.",
+                        "tr": "Baharatlı domates-sarımsak sosu ve safran pirinci ile patates yahnisi.",
+                        "es": "Estofado de patatas con salsa picante de tomate y ajo y arroz con azafrán."
+                    }
+                },
+                {
+                    "name": {
+                        "de": "Lentils & Saffron",
+                        "en": "Lentils & Saffron",
+                        "tr": "Mercimek & Safran",
+                        "es": "Lentejas y Azafrán"
+                    },
+                    "price": "11.90",
+                    "desc": {
+                        "de": "Linseneintopf fein abgestimmt mit Safran.",
+                        "en": "Lentil stew finely balanced with saffron.",
+                        "tr": "Safran ile ince ayarlanmış mercimek yahnisi.",
+                        "es": "Estofado de lentejas finamente equilibrado con azafrán."
+                    }
+                },
+                {
+                    "name": {
+                        "de": "Falafel Teller",
+                        "en": "Falafel Plate",
+                        "tr": "Falafel Tabağı",
+                        "es": "Plato de Falafel"
+                    },
+                    "price": "9.90",
+                    "desc": {
+                        "de": "5 Falafel, Hummus, eingelegtes Gemüse & Naan.",
+                        "en": "5 Falafel, hummus, pickled vegetables & naan.",
+                        "tr": "5 Falafel, humus, turşu sebzeler ve naan.",
+                        "es": "5 Falafel, hummus, verduras en escabeche y naan."
+                    }
+                }
+            ]
         },
         {
-          "name": "Vegan Lentil Soup",
-          "price": "7.90",
-          "desc": "Linsensuppe nach hausgemachtem Rezept."
+            "id": "spezial",
+            "name": {
+                "de": "Spezialitäten",
+                "en": "Specialties",
+                "tr": "Spesiyaller",
+                "es": "Especialidades"
+            },
+            "items": [
+                {
+                    "name": {
+                        "de": "Mantu Teigtaschen",
+                        "en": "Mantu Dumplings",
+                        "tr": "Mantu Mantısı",
+                        "es": "Mantu Empanadillas"
+                    },
+                    "price": "24.90",
+                    "desc": {
+                        "de": "12 hausgemachte gedämpfte Teigtaschen mit würziger Fleischfüllung und Joghurtsauce.",
+                        "en": "12 homemade steamed dumplings with spicy meat filling and yogurt sauce.",
+                        "tr": "Baharatlı et dolgulu ve yoğurt soslu 12 adet ev yapımı buğulanmış mantı.",
+                        "es": "12 empanadillas caseras al vapor con relleno de carne picante y salsa de yogur."
+                    }
+                },
+                {
+                    "name": {
+                        "de": "Mix Kabab",
+                        "en": "Mix Kabab",
+                        "tr": "Mix Kebap",
+                        "es": "Mix Kabab"
+                    },
+                    "price": "17.90",
+                    "desc": {
+                        "de": "Eine Auswahl unserer besten Grill-Spezialitäten.",
+                        "en": "A selection of our best grill specialties.",
+                        "tr": "En iyi ızgara spesiyallerimizden bir seçki.",
+                        "es": "Una selección de nuestras mejores especialidades a la parrilla."
+                    }
+                }
+            ]
+        },
+        {
+            "id": "desserts",
+            "name": {
+                "de": "Desserts",
+                "en": "Desserts",
+                "tr": "Tatlılar",
+                "es": "Postres"
+            },
+            "items": [
+                {
+                    "name": {
+                        "de": "Pistazien Ferni",
+                        "en": "Pistachio Ferni",
+                        "tr": "Fıstıklı Ferni",
+                        "es": "Ferni de Pistacho"
+                    },
+                    "price": "4.90",
+                    "desc": {
+                        "de": "Kardamom-Vanille Pudding mit Pistazien und Mandeln.",
+                        "en": "Cardamom-vanilla pudding with pistachios and almonds.",
+                        "tr": "Antep fıstığı ve badem ile kakuleli vanilyalı puding.",
+                        "es": "Pudding de cardamomo y vainilla con pistachos y almendras."
+                    }
+                },
+                {
+                    "name": {
+                        "de": "Hausgemachter Safrankuchen",
+                        "en": "Homemade Saffron Cake",
+                        "tr": "Ev Yapımı Safranlı Kek",
+                        "es": "Pastel de Azafrán Casero"
+                    },
+                    "price": "4.90",
+                    "desc": {
+                        "de": "Süßer Kuchen verfeinert mit edlem Safran.",
+                        "en": "Sweet cake refined with precious saffron.",
+                        "tr": "Değerli safran ile rafine edilmiş tatlı kek.",
+                        "es": "Pastel dulce refinado con azafrán preciado."
+                    }
+                },
+                {
+                    "name": {
+                        "de": "Baklava",
+                        "en": "Baklava",
+                        "tr": "Baklava",
+                        "es": "Baklava"
+                    },
+                    "price": "4.90",
+                    "desc": {
+                        "de": "Orientalisches Blätterteiggebäck mit Walnüssen und Pistazien.",
+                        "en": "Oriental puff pastry with walnuts and pistachios.",
+                        "tr": "Ceviz ve antep fıstığı ile oryantal milföy hamuru tatlısı.",
+                        "es": "Hojaldre oriental con nueces y pistachos."
+                    }
+                }
+            ]
         }
-      ]
-    },
-    {
-      "id": "hauptspeisen-huhn",
-      "name": "Hauptgerichte Huhn",
-      "items": [
-        {
-          "name": "Chicken Karahi",
-          "price": "14.90",
-          "desc": "Hühnerbruststücke zubereitet in einer würzigen, traditionellen Sauce."
-        },
-        {
-          "name": "Chicken Dupiaza",
-          "price": "14.90",
-          "desc": "Hühnerfleisch mit viel Zwiebeln und orientalischen Gewürzen."
-        },
-        {
-          "name": "Chicken Biryani",
-          "price": "14.90",
-          "desc": "Würziger Safranreis mit Hühnerfleisch und Mandeln."
-        },
-        {
-          "name": "Morgh Karahi",
-          "price": "14.90",
-          "desc": "Spezialität des Hauses mit saftigem Hühnerfleisch."
-        }
-      ]
-    },
-    {
-      "id": "hauptspeisen-lamm",
-      "name": "Hauptgerichte Lamm",
-      "items": [
-        {
-          "name": "Lamm Dupiaza",
-          "price": "21.90",
-          "desc": "Zartes Lammfleisch mit Zwiebeln und feinen Kräutern."
-        },
-        {
-          "name": "Lamm Qabeli Palav",
-          "price": "24.90",
-          "desc": "Traditioneller Reis mit Lammfleisch, Karotten und Rosinen."
-        },
-        {
-          "name": "Lamm Biryani",
-          "price": "23.90",
-          "desc": "Lammfleisch mit würzigem Safranreis."
-        }
-      ]
-    },
-    {
-      "id": "veggie",
-      "name": "Vegetarisch & Vegan",
-      "items": [
-        {
-          "name": "Borani Banjan",
-          "price": "17.90",
-          "desc": "Gebratene Auberginen mit Tomaten, Zwiebeln, Knoblauch und Minzsauce, serviert mit Naan."
-        },
-        {
-          "name": "Qorme Katchalu",
-          "price": "13.90",
-          "desc": "Kartoffeleintopf mit würziger Tomaten-Knoblauchsauce und Safranreis."
-        },
-        {
-          "name": "Lentils & Saffron",
-          "price": "11.90",
-          "desc": "Linseneintopf fein abgestimmt mit Safran."
-        },
-        {
-          "name": "Falafel Teller",
-          "price": "9.90",
-          "desc": "5 Falafel, Hummus, eingelegtes Gemüse & Naan."
-        }
-      ]
-    },
-    {
-      "id": "spezial",
-      "name": "Spezialitäten",
-      "items": [
-        {
-          "name": "Mantu Teigtaschen",
-          "price": "24.90",
-          "desc": "12 hausgemachte gedämpfte Teigtaschen mit würziger Fleischfüllung und Joghurtsauce."
-        },
-        {
-          "name": "Mix Kabab",
-          "price": "17.90",
-          "desc": "Eine Auswahl unserer besten Grill-Spezialitäten."
-        }
-      ]
-    },
-    {
-      "id": "desserts",
-      "name": "Desserts",
-      "items": [
-        {
-          "name": "Pistazien Ferni",
-          "price": "4.90",
-          "desc": "Kardamom-Vanille Pudding mit Pistazien und Mandeln."
-        },
-        {
-          "name": "Hausgemachter Safrankuchen",
-          "price": "4.90",
-          "desc": "Süßer Kuchen verfeinert mit edlem Safran."
-        },
-        {
-          "name": "Baklava",
-          "price": "4.90",
-          "desc": "Orientalisches Blätterteiggebäck mit Walnüssen und Pistazien."
-        }
-      ]
-    },
-    {
-      "id": "probemen",
-      "name": "Probemenü",
-      "items": [
-        {
-          "name": "Suppen Gulasch mit Brot",
-          "price": "28.90",
-          "desc": "Schmeckt lecker! Brrroo!"
-        },
-        {
-          "name": "Chicken Beef Nugget",
-          "price": "74.90",
-          "desc": "Schmeckt gut, mit Brot."
-        }
-      ]
-    }
-  ]
+    ]
 }
