@@ -95,7 +95,12 @@ async function loadMenu() {
         categoriesContainer.innerHTML = '';
         renderDashboard();
     } catch (err) {
-        // Fallback to local file for development/testing
+        // If it's an authentication error (401), don't fallback, just fail.
+        if (err.message.includes('401')) {
+            throw err;
+        }
+
+        // Fallback to local file only for other errors (e.g. network/proxy down)
         console.warn('Proxy nicht erreichbar, lade lokale menu.json:', err.message);
         try {
             const res = await fetch('../menu.json');
