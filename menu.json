@@ -149,6 +149,11 @@
           "name": "Suppen Gulasch mit Brot",
           "price": "28.90",
           "desc": "Schmeckt lecker! Brrroo!"
+        },
+        {
+          "name": "Chicken Beef Nugget",
+          "price": "74.90",
+          "desc": "Schmeckt gut, mit Brot."
         }
       ]
     }
