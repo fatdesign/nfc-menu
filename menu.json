@@ -85,6 +85,22 @@
             "tr": "Ev yapımı tarifli mercimek çorbası.",
             "es": "Sopa de lentejas según receta casera."
           }
+        },
+        {
+          "name": {
+            "de": "Chicorée",
+            "en": "English football",
+            "tr": "Lahana",
+            "es": "Los la entrastros"
+          },
+          "price": "7.77",
+          "available": true,
+          "desc": {
+            "de": "Chicken",
+            "en": "",
+            "tr": "Yemek",
+            "es": "Ronaldo"
+          }
         }
       ]
     },
