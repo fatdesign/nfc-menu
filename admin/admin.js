@@ -1,9 +1,9 @@
 // ============================================
-// SHAKER ADMIN - CORE LOGIC
+// SHAKER ADMIN - CORE LOGIC (Proxy Version)
 // ============================================
 
 let menuData = null;
-let currentFileSha = null; // GitHub requires the file's SHA to update it
+let currentFileSha = null;
 
 // ---- DOM References ----
 const loginScreen = document.getElementById('login-screen');
@@ -15,14 +15,10 @@ const saveStatus = document.getElementById('save-status');
 const logoutBtn = document.getElementById('logout-btn');
 const categoriesContainer = document.getElementById('categories-container');
 const addCategoryBtn = document.getElementById('add-category-btn');
-
-// Item Modal
 const itemModal = document.getElementById('item-modal');
 const itemForm = document.getElementById('item-form');
 const modalTitle = document.getElementById('modal-title');
 const modalCancel = document.getElementById('modal-cancel');
-
-// Category Modal
 const catModal = document.getElementById('cat-modal');
 const catForm = document.getElementById('cat-form');
 const catModalCancel = document.getElementById('cat-modal-cancel');
@@ -46,31 +42,44 @@ logoutBtn.addEventListener('click', () => {
     dashboardScreen.classList.remove('active');
     loginScreen.classList.add('active');
     document.getElementById('password').value = '';
+    menuData = null;
+    currentFileSha = null;
 });
 
-// ---- Load Menu from GitHub ----
+// ---- API Helper ----
+// Sends requests to our PHP proxy. The proxy holds the GitHub token securely.
+async function proxyRequest(method, body = null) {
+    const options = {
+        method,
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Admin-Password': ADMIN_CONFIG.password, // Server validates this
+        },
+    };
+    if (body) options.body = JSON.stringify(body);
+
+    const res = await fetch(ADMIN_CONFIG.proxyUrl, options);
+    if (!res.ok) {
+        const err = await res.json().catch(() => ({ error: `HTTP ${res.status}` }));
+        throw new Error(err.error || `HTTP ${res.status}`);
+    }
+    return res.json();
+}
+
+// ---- Load Menu via Proxy ----
 async function loadMenu() {
     categoriesContainer.innerHTML = '<p style="text-align:center;color:#888;padding:3rem;">Lade Speisekarte...</p>';
 
     try {
-        const url = `https://api.github.com/repos/${ADMIN_CONFIG.githubOwner}/${ADMIN_CONFIG.githubRepo}/contents/${ADMIN_CONFIG.menuFilePath}`;
-        const res = await fetch(url, {
-            headers: {
-                'Authorization': `Bearer ${ADMIN_CONFIG.githubToken}`,
-                'Accept': 'application/vnd.github.v3+json'
-            }
-        });
-
-        if (!res.ok) throw new Error(`GitHub API Error: ${res.status}`);
-
-        const fileData = await res.json();
+        const fileData = await proxyRequest('GET');
         currentFileSha = fileData.sha;
-        const decoded = atob(fileData.content.replace(/\n/g, ''));
+        const decoded = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
         menuData = JSON.parse(decoded);
+        categoriesContainer.innerHTML = '';
         renderDashboard();
     } catch (err) {
-        // Fallback: load from local file (for local testing)
-        console.warn('GitHub API failed, loading local menu.json:', err.message);
+        // Fallback to local file for development/testing
+        console.warn('Proxy nicht erreichbar, lade lokale menu.json:', err.message);
         try {
             const res = await fetch('../menu.json');
             menuData = await res.json();
@@ -78,8 +87,12 @@ async function loadMenu() {
             categoriesContainer.innerHTML = '';
             showConfigNotice();
             renderDashboard();
-        } catch (localErr) {
-            categoriesContainer.innerHTML = `<p style="color:#c0392b;text-align:center;padding:3rem;">Fehler beim Laden der Speisekarte. Bitte config.js prüfen.</p>`;
+        } catch {
+            categoriesContainer.innerHTML = `
+                <div style="text-align:center;padding:3rem;color:#c0392b;">
+                    <p>❌ Proxy nicht erreichbar und keine lokale menu.json gefunden.</p>
+                    <p style="font-size:0.85rem;color:#888;margin-top:0.5rem;">Bitte <code>admin/config.js</code> (proxyUrl) prüfen.</p>
+                </div>`;
         }
     }
 }
@@ -87,13 +100,12 @@ async function loadMenu() {
 function showConfigNotice() {
     const notice = document.createElement('div');
     notice.className = 'config-notice';
-    notice.innerHTML = '⚠️ <strong>Lokaler Modus:</strong> GitHub API nicht konfiguriert. Änderungen werden nicht gespeichert. Bitte <code>admin/config.js</code> ausfüllen.';
+    notice.innerHTML = '⚠️ <strong>Lokaler Modus:</strong> Proxy nicht konfiguriert. Änderungen werden nicht gespeichert. Bitte <code>proxyUrl</code> in <code>admin/config.js</code> eintragen und <code>proxy.php</code> auf deinen Server hochladen.';
     categoriesContainer.appendChild(notice);
 }
 
 // ---- Render Dashboard ----
 function renderDashboard() {
-    // Clear existing (but keep notice if present)
     const notice = categoriesContainer.querySelector('.config-notice');
     categoriesContainer.innerHTML = '';
     if (notice) categoriesContainer.appendChild(notice);
@@ -101,8 +113,6 @@ function renderDashboard() {
     menuData.categories.forEach((cat, catIdx) => {
         const block = document.createElement('div');
         block.className = 'category-block';
-        block.dataset.catIdx = catIdx;
-
         block.innerHTML = `
             <div class="category-header">
                 <span class="category-name">${cat.name}</span>
@@ -120,19 +130,14 @@ function renderDashboard() {
         categoriesContainer.appendChild(block);
     });
 
-    // Attach events
-    document.querySelectorAll('.add-item-btn').forEach(btn => {
-        btn.addEventListener('click', () => openItemModal(parseInt(btn.dataset.catIdx)));
-    });
-    document.querySelectorAll('.edit-item-btn').forEach(btn => {
-        btn.addEventListener('click', () => openItemModal(parseInt(btn.dataset.catIdx), parseInt(btn.dataset.itemIdx)));
-    });
-    document.querySelectorAll('.delete-item-btn').forEach(btn => {
-        btn.addEventListener('click', () => deleteItem(parseInt(btn.dataset.catIdx), parseInt(btn.dataset.itemIdx)));
-    });
-    document.querySelectorAll('.delete-cat-btn').forEach(btn => {
-        btn.addEventListener('click', () => deleteCategory(parseInt(btn.dataset.catIdx)));
-    });
+    document.querySelectorAll('.add-item-btn').forEach(btn =>
+        btn.addEventListener('click', () => openItemModal(parseInt(btn.dataset.catIdx))));
+    document.querySelectorAll('.edit-item-btn').forEach(btn =>
+        btn.addEventListener('click', () => openItemModal(parseInt(btn.dataset.catIdx), parseInt(btn.dataset.itemIdx))));
+    document.querySelectorAll('.delete-item-btn').forEach(btn =>
+        btn.addEventListener('click', () => deleteItem(parseInt(btn.dataset.catIdx), parseInt(btn.dataset.itemIdx))));
+    document.querySelectorAll('.delete-cat-btn').forEach(btn =>
+        btn.addEventListener('click', () => deleteCategory(parseInt(btn.dataset.catIdx))));
 }
 
 function renderItemRow(item, catIdx, itemIdx) {
@@ -147,15 +152,13 @@ function renderItemRow(item, catIdx, itemIdx) {
                 <button class="btn-icon edit-item-btn" data-cat-idx="${catIdx}" data-item-idx="${itemIdx}" title="Bearbeiten">✏️</button>
                 <button class="btn-icon delete delete-item-btn" data-cat-idx="${catIdx}" data-item-idx="${itemIdx}" title="Löschen">🗑</button>
             </div>
-        </div>
-    `;
+        </div>`;
 }
 
 // ---- Item Modal ----
 function openItemModal(catIdx, itemIdx = null) {
     document.getElementById('item-cat-id').value = catIdx;
     document.getElementById('item-index').value = itemIdx !== null ? itemIdx : '';
-
     if (itemIdx !== null) {
         const item = menuData.categories[catIdx].items[itemIdx];
         modalTitle.textContent = 'Gericht bearbeiten';
@@ -175,26 +178,22 @@ itemModal.addEventListener('click', (e) => { if (e.target === itemModal) itemMod
 itemForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const catIdx = parseInt(document.getElementById('item-cat-id').value);
-    const itemIdxRaw = document.getElementById('item-index').value;
-    const itemIdx = itemIdxRaw !== '' ? parseInt(itemIdxRaw) : null;
-
+    const rawIdx = document.getElementById('item-index').value;
+    const itemIdx = rawIdx !== '' ? parseInt(rawIdx) : null;
     const newItem = {
         name: document.getElementById('item-name').value.trim(),
         price: document.getElementById('item-price').value.trim(),
-        desc: document.getElementById('item-desc').value.trim()
+        desc: document.getElementById('item-desc').value.trim(),
     };
-
     if (itemIdx !== null) {
         menuData.categories[catIdx].items[itemIdx] = newItem;
     } else {
         menuData.categories[catIdx].items.push(newItem);
     }
-
     itemModal.classList.add('hidden');
     renderDashboard();
 });
 
-// ---- Delete Item ----
 function deleteItem(catIdx, itemIdx) {
     if (!confirm(`"${menuData.categories[catIdx].items[itemIdx].name}" wirklich löschen?`)) return;
     menuData.categories[catIdx].items.splice(itemIdx, 1);
@@ -202,10 +201,7 @@ function deleteItem(catIdx, itemIdx) {
 }
 
 // ---- Category Modal ----
-addCategoryBtn.addEventListener('click', () => {
-    catForm.reset();
-    catModal.classList.remove('hidden');
-});
+addCategoryBtn.addEventListener('click', () => { catForm.reset(); catModal.classList.remove('hidden'); });
 catModalCancel.addEventListener('click', () => catModal.classList.add('hidden'));
 catModal.addEventListener('click', (e) => { if (e.target === catModal) catModal.classList.add('hidden'); });
 
@@ -218,7 +214,6 @@ catForm.addEventListener('submit', (e) => {
     renderDashboard();
 });
 
-// ---- Delete Category ----
 function deleteCategory(catIdx) {
     const cat = menuData.categories[catIdx];
     if (!confirm(`Kategorie "${cat.name}" mit ${cat.items.length} Gerichten wirklich löschen?`)) return;
@@ -226,12 +221,12 @@ function deleteCategory(catIdx) {
     renderDashboard();
 }
 
-// ---- Save to GitHub ----
-saveBtn.addEventListener('click', saveToGitHub);
+// ---- Save via Proxy ----
+saveBtn.addEventListener('click', saveMenu);
 
-async function saveToGitHub() {
+async function saveMenu() {
     if (!currentFileSha) {
-        setSaveStatus('Kein GitHub-Token konfiguriert.', 'error');
+        setSaveStatus('Kein Proxy konfiguriert – lokaler Modus.', 'error');
         return;
     }
 
@@ -239,34 +234,14 @@ async function saveToGitHub() {
     setSaveStatus('Speichern...', '');
 
     try {
-        const content = btoa(unescape(encodeURIComponent(JSON.stringify(menuData, null, 2))));
-        const url = `https://api.github.com/repos/${ADMIN_CONFIG.githubOwner}/${ADMIN_CONFIG.githubRepo}/contents/${ADMIN_CONFIG.menuFilePath}`;
+        const jsonString = JSON.stringify(menuData, null, 2);
+        const content = btoa(unescape(encodeURIComponent(jsonString)));
 
-        const res = await fetch(url, {
-            method: 'PUT',
-            headers: {
-                'Authorization': `Bearer ${ADMIN_CONFIG.githubToken}`,
-                'Accept': 'application/vnd.github.v3+json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                message: 'Admin: Speisekarte aktualisiert',
-                content: content,
-                sha: currentFileSha
-            })
-        });
-
-        if (!res.ok) {
-            const err = await res.json();
-            throw new Error(err.message || `HTTP ${res.status}`);
-        }
-
-        const data = await res.json();
-        currentFileSha = data.content.sha; // Update SHA for next save
-        setSaveStatus('✓ Erfolgreich gespeichert!', 'success');
+        const result = await proxyRequest('POST', { content, sha: currentFileSha });
+        currentFileSha = result.content.sha; // Update SHA for next save
+        setSaveStatus('✓ Gespeichert! Seite wird in ~30 Sek. aktualisiert.', 'success');
     } catch (err) {
         setSaveStatus(`Fehler: ${err.message}`, 'error');
-        console.error(err);
     } finally {
         saveBtn.disabled = false;
     }
@@ -276,6 +251,6 @@ function setSaveStatus(msg, type) {
     saveStatus.textContent = msg;
     saveStatus.className = 'save-status ' + type;
     if (type === 'success') {
-        setTimeout(() => { saveStatus.textContent = ''; saveStatus.className = 'save-status'; }, 4000);
+        setTimeout(() => { saveStatus.textContent = ''; saveStatus.className = 'save-status'; }, 5000);
     }
 }
