@@ -2,33 +2,36 @@
 // SHAKER ADMIN - CORE LOGIC (Proxy Version)
 // ============================================
 
-// ---- State ----
-let sessionPassword = null;
+let sessionPassword = '';
 
 // ---- Authentication ----
 loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const pw = document.getElementById('password').value.trim();
+    const pw = document.getElementById('password').value;
+    const submitBtn = loginForm.querySelector('button[type="submit"]');
 
-    // Attempt to login by fetching menu
+    submitBtn.disabled = true;
     loginError.classList.add('hidden');
-    loginForm.querySelector('button').disabled = true;
-    loginForm.querySelector('button').textContent = 'Anmelden...';
+
+    // We try to load the menu with the provided password.
+    // If it works, the password is correct.
+    sessionPassword = pw;
 
     try {
-        sessionPassword = pw;
-        await loadMenu(); // This will use sessionPassword for the request
-
+        await loadMenu();
         loginScreen.classList.remove('active');
         dashboardScreen.classList.add('active');
     } catch (err) {
-        sessionPassword = null;
-        loginError.textContent = 'Falsches Passwort oder Verbindungsfehler.';
+        sessionPassword = '';
+        if (err.message.includes('401')) {
+            loginError.textContent = 'Falsches Passwort.';
+        } else {
+            loginError.textContent = 'Verbindungsfehler: ' + err.message;
+        }
         loginError.classList.remove('hidden');
         document.getElementById('password').value = '';
     } finally {
-        loginForm.querySelector('button').disabled = false;
-        loginForm.querySelector('button').textContent = 'Anmelden';
+        submitBtn.disabled = false;
     }
 });
 
@@ -36,28 +39,24 @@ logoutBtn.addEventListener('click', () => {
     dashboardScreen.classList.remove('active');
     loginScreen.classList.add('active');
     document.getElementById('password').value = '';
+    sessionPassword = '';
     menuData = null;
     currentFileSha = null;
-    sessionPassword = null;
 });
 
 // ---- API Helper ----
-// Sends requests to our Cloudflare Worker. The Worker holds the GitHub token securely.
 async function proxyRequest(method, body = null) {
-    if (!sessionPassword) throw new Error('Nicht angemeldet');
-
     const options = {
         method,
         headers: {
             'Content-Type': 'application/json',
-            'X-Admin-Password': sessionPassword, // Worker validates this against its Environment Variable
+            'X-Admin-Password': sessionPassword,
         },
     };
     if (body) options.body = JSON.stringify(body);
 
     const res = await fetch(ADMIN_CONFIG.proxyUrl, options);
     if (!res.ok) {
-        if (res.status === 401) throw new Error('Falsches Passwort');
         const err = await res.json().catch(() => ({ error: `HTTP ${res.status}` }));
         throw new Error(err.error || `HTTP ${res.status}`);
     }

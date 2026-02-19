@@ -10,6 +10,5 @@
 
 const ADMIN_CONFIG = {
     // Die URL zu deinem Cloudflare Worker Proxy
-    // Beispiel: "https://shaker-menu-proxy.DEIN-NAME.workers.dev"
     proxyUrl: "https://shaker-menu-proxy.f-klavun.workers.dev",
 };
