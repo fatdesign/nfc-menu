@@ -586,7 +586,11 @@ body {
 }
 
 input:checked+.slider {
-    background-color: var(--red);
+    background-color: var(--green);
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px var(--green);
 }
 
 input:checked+.slider:before {
@@ -600,7 +604,7 @@ input:checked+.slider:before {
 }
 
 .badge-aus {
-    background: var(--red);
+    background: var(--green);
     color: white;
     font-size: 0.65rem;
     font-weight: 800;
@@ -614,6 +618,7 @@ input:checked+.slider:before {
 
 .item-row.is-unavailable {
     opacity: 0.6;
+    background: rgba(39, 174, 96, 0.03);
 }
 
 .item-row.is-unavailable .item-row-name {
