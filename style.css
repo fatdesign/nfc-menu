@@ -117,18 +117,7 @@ ul {
     .header-content {
         flex-direction: row;
         justify-content: space-between;
-        align-items: center;
-        padding: 0 1.5rem;
-        /* Increased from 1rem */
-    }
-
-    .brand {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 1.1rem;
-        /* Slightly smaller to fit */
-        white-space: nowrap;
+        padding: 0 var(--space-s);
     }
 }
 
@@ -150,45 +139,34 @@ ul {
 @media (max-width: 768px) {
     #mobile-menu-toggle {
         display: flex;
-        padding: 8px;
-        border: none;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 8px;
+        /* Shown only on mobile */
     }
 }
 
 /* Language Switcher */
-.header-left,
 .header-right {
     display: flex;
     align-items: center;
-    min-width: 60px;
-    /* Reduced to give more space for the logo */
-    position: relative;
-    z-index: 5;
-}
-
-.header-right {
-    justify-content: flex-end;
+    gap: var(--space-s);
 }
 
 .lang-switcher {
     display: flex;
-    gap: 4px;
+    gap: 8px;
     background: rgba(255, 255, 255, 0.05);
-    padding: 3px;
+    padding: 4px;
     border-radius: 20px;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border);
 }
 
 .lang-btn {
     background: transparent;
     border: none;
     color: var(--text-muted);
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     font-weight: 700;
-    padding: 3px 6px;
-    border-radius: 12px;
+    padding: 4px 8px;
+    border-radius: 15px;
     cursor: pointer;
     transition: var(--transition-smooth);
     font-family: var(--font-ui);

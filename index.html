@@ -14,43 +14,41 @@
 
     <!-- Navigation Overlay / Header -->
     <header class="main-header glass animate-fade-in">
-        <!-- Mobile Left: Lang Switcher -->
-        <div class="header-left mobile-only">
-            <div class="lang-switcher">
-                <button class="lang-btn" data-lang="de">DE</button>
-                <button class="lang-btn" data-lang="en">EN</button>
-                <button class="lang-btn" data-lang="tr">TR</button>
-                <button class="lang-btn" data-lang="es">ES</button>
+        <div class="container header-content">
+            <div class="brand">
+                <span class="gold-text">SHAKER</span> RESTAURANT
             </div>
-        </div>
-
-        <div class="brand">
-            <span class="gold-text">SHAKER</span> RESTAURANT
-        </div>
-        <!-- Desktop Nav -->
-        <nav class="category-nav desktop-only">
-            <ul id="category-list">
-                <!-- Categories will be injected here -->
-            </ul>
-        </nav>
-        <!-- Mobile Menu Toggle -->
-        <div class="header-right mobile-only">
-            <button id="mobile-menu-toggle" aria-label="Menu öffnen">
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
+            <!-- Desktop Nav -->
+            <nav class="category-nav desktop-only">
+                <ul id="category-list">
+                    <!-- Categories will be injected here -->
+                </ul>
+            </nav>
+            <!-- Mobile Menu Toggle -->
+            <div class="header-right mobile-only">
+                <div class="lang-switcher">
+                    <button class="lang-btn" data-lang="de">DE</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                    <button class="lang-btn" data-lang="tr">TR</button>
+                    <button class="lang-btn" data-lang="es">ES</button>
                 </div>
-            </button>
-        </div>
-        <!-- Desktop Layout also needs it but let's place it in the desktop nav or separate -->
-        <div class="desktop-only header-right-desktop">
-            <div class="lang-switcher">
-                <button class="lang-btn" data-lang="de">DE</button>
-                <button class="lang-btn" data-lang="en">EN</button>
-                <button class="lang-btn" data-lang="tr">TR</button>
-                <button class="lang-btn" data-lang="es">ES</button>
+                <button id="mobile-menu-toggle" aria-label="Menu öffnen">
+                    <span class="menu-label gold-text">MENÜ</span>
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                    </div>
+                </button>
             </div>
-        </div>
+            <!-- Desktop Layout also needs it but let's place it in the desktop nav or separate -->
+            <div class="desktop-only header-right-desktop">
+                <div class="lang-switcher">
+                    <button class="lang-btn" data-lang="de">DE</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                    <button class="lang-btn" data-lang="tr">TR</button>
+                    <button class="lang-btn" data-lang="es">ES</button>
+                </div>
+            </div>
         </div>
     </header>
 
