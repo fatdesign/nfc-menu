@@ -361,6 +361,24 @@ body {
 
 /* Response Fixes for Admin Items */
 @media (max-width: 600px) {
+    .category-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1.2rem 1rem;
+    }
+
+    .category-actions {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 0.5rem;
+    }
+
+    .category-actions .btn {
+        flex: 1;
+        justify-content: center;
+    }
+
     .item-row {
         padding: 1.2rem 1rem;
         flex-direction: column;
