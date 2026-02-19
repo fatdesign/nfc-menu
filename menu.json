@@ -33,6 +33,7 @@
             "es": "Crujiente de Patata Pakawra"
           },
           "price": "9.50",
+          "available": false,
           "desc": {
             "de": "Knusprig gebackene Kartoffelscheiben mit würzigen Gewürzen.",
             "en": "Crispy baked potato slices with aromatic spices.",
