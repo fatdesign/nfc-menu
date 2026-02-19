@@ -17,7 +17,7 @@
             "es": "Hummus con Naan"
           },
           "price": "9.50",
-          "available": false,
+          "available": true,
           "desc": {
             "de": "Kichererbsenpüree mit Sesam-Paste, Olivenöl und frischem Fladenbrot.",
             "en": "Chickpea puree with sesame paste, olive oil and fresh flatbread.",
@@ -48,6 +48,7 @@
             "es": "Crujiente de Berenjena Pakawra"
           },
           "price": "9.50",
+          "available": false,
           "desc": {
             "de": "Knusprig gebackene Auberginenscheiben.",
             "en": "Crispy baked eggplant slices.",
@@ -209,6 +210,7 @@
             "es": "Cordero Biryani"
           },
           "price": "23.90",
+          "available": false,
           "desc": {
             "de": "Lammfleisch mit würzigem Safranreis.",
             "en": "Lamb meat with spicy saffron rice.",
@@ -235,6 +237,7 @@
             "es": "Borani Banjan"
           },
           "price": "17.90",
+          "available": false,
           "desc": {
             "de": "Gebratene Auberginen mit Tomaten, Zwiebeln, Knoblauch und Minzsauce, serviert mit Naan.",
             "en": "Fried eggplants with tomatoes, onions, garlic and mint sauce, served with naan.",
