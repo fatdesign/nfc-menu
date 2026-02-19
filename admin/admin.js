@@ -2,39 +2,33 @@
 // SHAKER ADMIN - CORE LOGIC (Proxy Version)
 // ============================================
 
-let menuData = null;
-let currentFileSha = null;
-
-// ---- DOM References ----
-const loginScreen = document.getElementById('login-screen');
-const dashboardScreen = document.getElementById('dashboard-screen');
-const loginForm = document.getElementById('login-form');
-const loginError = document.getElementById('login-error');
-const saveBtn = document.getElementById('save-btn');
-const saveStatus = document.getElementById('save-status');
-const logoutBtn = document.getElementById('logout-btn');
-const categoriesContainer = document.getElementById('categories-container');
-const addCategoryBtn = document.getElementById('add-category-btn');
-const itemModal = document.getElementById('item-modal');
-const itemForm = document.getElementById('item-form');
-const modalTitle = document.getElementById('modal-title');
-const modalCancel = document.getElementById('modal-cancel');
-const catModal = document.getElementById('cat-modal');
-const catForm = document.getElementById('cat-form');
-const catModalCancel = document.getElementById('cat-modal-cancel');
+// ---- State ----
+let sessionPassword = null;
 
 // ---- Authentication ----
-loginForm.addEventListener('submit', (e) => {
+loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const pw = document.getElementById('password').value;
-    if (pw === ADMIN_CONFIG.password) {
+    const pw = document.getElementById('password').value.trim();
+
+    // Attempt to login by fetching menu
+    loginError.classList.add('hidden');
+    loginForm.querySelector('button').disabled = true;
+    loginForm.querySelector('button').textContent = 'Anmelden...';
+
+    try {
+        sessionPassword = pw;
+        await loadMenu(); // This will use sessionPassword for the request
+
         loginScreen.classList.remove('active');
         dashboardScreen.classList.add('active');
-        loginError.classList.add('hidden');
-        loadMenu();
-    } else {
+    } catch (err) {
+        sessionPassword = null;
+        loginError.textContent = 'Falsches Passwort oder Verbindungsfehler.';
         loginError.classList.remove('hidden');
         document.getElementById('password').value = '';
+    } finally {
+        loginForm.querySelector('button').disabled = false;
+        loginForm.querySelector('button').textContent = 'Anmelden';
     }
 });
 
@@ -44,22 +38,26 @@ logoutBtn.addEventListener('click', () => {
     document.getElementById('password').value = '';
     menuData = null;
     currentFileSha = null;
+    sessionPassword = null;
 });
 
 // ---- API Helper ----
-// Sends requests to our PHP proxy. The proxy holds the GitHub token securely.
+// Sends requests to our Cloudflare Worker. The Worker holds the GitHub token securely.
 async function proxyRequest(method, body = null) {
+    if (!sessionPassword) throw new Error('Nicht angemeldet');
+
     const options = {
         method,
         headers: {
             'Content-Type': 'application/json',
-            'X-Admin-Password': ADMIN_CONFIG.password, // Server validates this
+            'X-Admin-Password': sessionPassword, // Worker validates this against its Environment Variable
         },
     };
     if (body) options.body = JSON.stringify(body);
 
     const res = await fetch(ADMIN_CONFIG.proxyUrl, options);
     if (!res.ok) {
+        if (res.status === 401) throw new Error('Falsches Passwort');
         const err = await res.json().catch(() => ({ error: `HTTP ${res.status}` }));
         throw new Error(err.error || `HTTP ${res.status}`);
     }

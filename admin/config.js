@@ -9,11 +9,7 @@
 // ============================================
 
 const ADMIN_CONFIG = {
-    // Das Passwort, das der Restaurantbesitzer eingibt
-    // (muss mit dem Passwort in proxy.php übereinstimmen)
-    password: "shaker2024",
-
-    // Die URL zu deinem PHP-Proxy auf deinem Server
-    // Beispiel: "https://fatdesign.at/shaker-proxy/proxy.php"
+    // Die URL zu deinem Cloudflare Worker Proxy
+    // Beispiel: "https://shaker-menu-proxy.DEIN-NAME.workers.dev"
     proxyUrl: "https://shaker-menu-proxy.f-klavun.workers.dev",
 };
