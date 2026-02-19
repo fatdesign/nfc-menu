@@ -321,7 +321,7 @@ async function saveMenu() {
 
         const result = await proxyRequest('POST', { content, sha: currentFileSha });
         currentFileSha = result.content.sha; // Update SHA for next save
-        setSaveStatus('✓ Gespeichert! Seite wird in ~30 Sek. aktualisiert.', 'success');
+        setSaveStatus('✓ Gespeichert! Menü wird in ca. 3 Min. aktualisiert.', 'success');
     } catch (err) {
         setSaveStatus(`Fehler: ${err.message}`, 'error');
     } finally {
