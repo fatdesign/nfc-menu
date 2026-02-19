@@ -175,14 +175,14 @@ function renderDashboard() {
 function renderItemRow(item, catIdx, itemIdx) {
     const name = item.name['de'] || 'N/A';
     const desc = item.desc ? item.desc['de'] : '';
-    const isAvailable = item.available !== false;
+    const isSoldOut = item.isSoldOut === true;
 
     return `
-        <div class="item-row ${!isAvailable ? 'is-unavailable' : ''}">
+        <div class="item-row ${isSoldOut ? 'is-unavailable' : ''}">
             <div class="item-info">
                 <div class="item-row-name">
                     ${name}
-                    ${!isAvailable ? '<span class="badge-aus">AUS</span>' : ''}
+                    ${isSoldOut ? '<span class="badge-aus">AUS</span>' : ''}
                 </div>
                 ${desc ? `<div class="item-row-desc">${desc}</div>` : ''}
             </div>
@@ -211,11 +211,11 @@ function openItemModal(catIdx, itemIdx = null) {
         document.getElementById('item-desc-tr').value = item.desc ? (item.desc['tr'] || '') : '';
         document.getElementById('item-desc-es').value = item.desc ? (item.desc['es'] || '') : '';
         document.getElementById('item-price').value = item.price;
-        document.getElementById('item-available').checked = item.available !== false;
+        document.getElementById('item-available').checked = item.isSoldOut === true;
     } else {
         modalTitle.textContent = 'Gericht hinzufügen';
         itemForm.reset();
-        document.getElementById('item-available').checked = true;
+        document.getElementById('item-available').checked = false;
     }
     itemModal.classList.remove('hidden');
 }
@@ -237,7 +237,7 @@ itemForm.addEventListener('submit', (e) => {
             es: document.getElementById('item-name-es').value.trim()
         },
         price: document.getElementById('item-price').value.trim(),
-        available: document.getElementById('item-available').checked,
+        isSoldOut: document.getElementById('item-available').checked,
         desc: {
             de: document.getElementById('item-desc-de').value.trim(),
             en: document.getElementById('item-desc-en').value.trim(),

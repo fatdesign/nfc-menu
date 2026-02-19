@@ -586,11 +586,11 @@ body {
 }
 
 input:checked+.slider {
-    background-color: var(--green);
+    background-color: var(--red);
 }
 
 input:focus+.slider {
-    box-shadow: 0 0 1px var(--green);
+    box-shadow: 0 0 1px var(--red);
 }
 
 input:checked+.slider:before {
