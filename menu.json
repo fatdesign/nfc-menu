@@ -48,7 +48,7 @@
             "es": "Crujiente de Berenjena Pakawra"
           },
           "price": "9.50",
-          "available": false,
+          "available": true,
           "desc": {
             "de": "Knusprig gebackene Auberginenscheiben.",
             "en": "Crispy baked eggplant slices.",
