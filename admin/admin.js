@@ -85,7 +85,7 @@ async function loadMenu() {
             menuData = await res.json();
             currentFileSha = null;
             categoriesContainer.innerHTML = '';
-            showConfigNotice();
+            showConfigNotice(err.message);
             renderDashboard();
         } catch {
             categoriesContainer.innerHTML = `
@@ -97,10 +97,12 @@ async function loadMenu() {
     }
 }
 
-function showConfigNotice() {
+function showConfigNotice(errMsg = '') {
     const notice = document.createElement('div');
     notice.className = 'config-notice';
-    notice.innerHTML = '⚠️ <strong>Lokaler Modus:</strong> Cloudflare Worker nicht konfiguriert. Änderungen werden nicht gespeichert. Bitte <code>proxyUrl</code> in <code>admin/config.js</code> mit deiner Worker-URL befüllen.';
+    notice.innerHTML = `⚠️ <strong>Lokaler Modus:</strong> Cloudflare Worker konnte nicht erreicht werden. 
+    <br><small style="opacity:0.8;">Fehler: ${errMsg}</small>
+    <br><br>Änderungen werden nur lokal angezeigt und nicht gespeichert. Bitte <code>proxyUrl</code> in <code>admin/config.js</code> prüfen.`;
     categoriesContainer.appendChild(notice);
 }
 
