@@ -178,6 +178,7 @@
             "es": "Cordero Dupiaza"
           },
           "price": "21.90",
+          "available": false,
           "desc": {
             "de": "Zartes Lammfleisch mit Zwiebeln und feinen Kräutern.",
             "en": "Tender lamb meat with onions and fine herbs.",
