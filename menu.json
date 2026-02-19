@@ -104,7 +104,7 @@
             "es": "Pollo Karahi"
           },
           "price": "14.90",
-          "available": false,
+          "available": true,
           "desc": {
             "de": "Hühnerbruststücke zubereitet in einer würzigen, traditionellen Sauce.",
             "en": "Chicken breast pieces prepared in a spicy, traditional sauce.",
