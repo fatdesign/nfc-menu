@@ -116,8 +116,9 @@ ul {
 
     .header-content {
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: center;
         padding: 0 var(--space-s);
+        position: relative;
     }
 }
 
@@ -139,7 +140,10 @@ ul {
 @media (max-width: 768px) {
     #mobile-menu-toggle {
         display: flex;
-        /* Shown only on mobile */
+        position: absolute;
+        right: var(--space-s);
+        top: 50%;
+        transform: translateY(-50%);
     }
 }
 
@@ -154,9 +158,19 @@ ul {
     display: flex;
     gap: 8px;
     background: rgba(255, 255, 255, 0.05);
-    padding: 4px;
-    border-radius: 20px;
-    border: 1px solid var(--border);
+    padding: 6px;
+    border-radius: 25px;
+    border: 1px solid var(--border-color);
+}
+
+.lang-switcher-mobile {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    animation: slide-up 0.5s ease forwards;
+    animation-delay: 0.3s;
+    opacity: 0;
 }
 
 .lang-btn {
