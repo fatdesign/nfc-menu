@@ -45,6 +45,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             let itemsHtml = '';
             cat.items.forEach((item, itemIdx) => {
+                if (item.available === false) return; // Skip sold out items
+
                 const itemName = item.name[lang] || item.name['de'];
                 const itemDesc = item.desc ? (item.desc[lang] || item.desc['de']) : '';
 

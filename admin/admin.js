@@ -169,10 +169,15 @@ function renderDashboard() {
 function renderItemRow(item, catIdx, itemIdx) {
     const name = item.name['de'] || 'N/A';
     const desc = item.desc ? item.desc['de'] : '';
+    const isAvailable = item.available !== false;
+
     return `
-        <div class="item-row">
+        <div class="item-row ${!isAvailable ? 'is-unavailable' : ''}">
             <div class="item-info">
-                <div class="item-row-name">${name}</div>
+                <div class="item-row-name">
+                    ${name}
+                    ${!isAvailable ? '<span class="badge-aus">AUS</span>' : ''}
+                </div>
                 ${desc ? `<div class="item-row-desc">${desc}</div>` : ''}
             </div>
             <div class="item-row-price">€ ${item.price}</div>
@@ -200,9 +205,11 @@ function openItemModal(catIdx, itemIdx = null) {
         document.getElementById('item-desc-tr').value = item.desc ? (item.desc['tr'] || '') : '';
         document.getElementById('item-desc-es').value = item.desc ? (item.desc['es'] || '') : '';
         document.getElementById('item-price').value = item.price;
+        document.getElementById('item-available').checked = item.available !== false;
     } else {
         modalTitle.textContent = 'Gericht hinzufügen';
         itemForm.reset();
+        document.getElementById('item-available').checked = true;
     }
     itemModal.classList.remove('hidden');
 }
@@ -224,6 +231,7 @@ itemForm.addEventListener('submit', (e) => {
             es: document.getElementById('item-name-es').value.trim()
         },
         price: document.getElementById('item-price').value.trim(),
+        available: document.getElementById('item-available').checked,
         desc: {
             de: document.getElementById('item-desc-de').value.trim(),
             en: document.getElementById('item-desc-en').value.trim(),

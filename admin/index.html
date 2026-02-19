@@ -113,9 +113,17 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="item-price">Preis (€)</label>
-                    <input type="text" id="item-price" placeholder="z.B. 14.90" required>
+                <div class="form-group flex-between"
+                    style="background: var(--surface-2); padding: 1rem; border-radius: var(--radius-sm); margin-bottom: 2rem;">
+                    <div>
+                        <label style="margin-bottom: 0;">AUSVERKAUFT (AUS)</label>
+                        <small style="color: var(--text-muted); display: block; margin-top: 4px;">Gericht wird nicht auf
+                            der Speisekarte angezeigt</small>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="item-available">
+                        <span class="slider"></span>
+                    </label>
                 </div>
 
                 <div class="modal-actions">
