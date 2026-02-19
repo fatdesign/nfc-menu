@@ -3,6 +3,26 @@
 // ============================================
 
 let sessionPassword = '';
+let menuData = null;
+let currentFileSha = null;
+
+// ---- DOM References ----
+const loginScreen = document.getElementById('login-screen');
+const dashboardScreen = document.getElementById('dashboard-screen');
+const loginForm = document.getElementById('login-form');
+const loginError = document.getElementById('login-error');
+const saveBtn = document.getElementById('save-btn');
+const saveStatus = document.getElementById('save-status');
+const logoutBtn = document.getElementById('logout-btn');
+const categoriesContainer = document.getElementById('categories-container');
+const addCategoryBtn = document.getElementById('add-category-btn');
+const itemModal = document.getElementById('item-modal');
+const itemForm = document.getElementById('item-form');
+const modalTitle = document.getElementById('modal-title');
+const modalCancel = document.getElementById('modal-cancel');
+const catModal = document.getElementById('cat-modal');
+const catForm = document.getElementById('cat-form');
+const catModalCancel = document.getElementById('cat-modal-cancel');
 
 // ---- Authentication ----
 loginForm.addEventListener('submit', async (e) => {
