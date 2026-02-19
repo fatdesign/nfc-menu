@@ -117,21 +117,17 @@ ul {
     .header-content {
         flex-direction: row;
         justify-content: space-between;
-        align-items: flex-end;
-        /* Align buttons/elements to bottom */
-        padding: 0 20px 8px 20px;
-        /* More side space, some bottom space */
-        height: 80px;
-        /* Fixed height to control alignment if needed */
+        align-items: center;
+        padding: 0 1.5rem;
+        /* Increased from 1rem */
     }
 
     .brand {
         position: absolute;
         left: 50%;
-        top: 20px;
-        /* Move logo up a bit if buttons are at bottom */
         transform: translateX(-50%);
         font-size: 1.1rem;
+        /* Slightly smaller to fit */
         white-space: nowrap;
     }
 }
@@ -161,13 +157,15 @@ ul {
     }
 }
 
+/* Language Switcher */
 .header-left,
 .header-right {
     display: flex;
     align-items: center;
-    min-width: 80px;
-    padding-bottom: 2px;
-    /* Fine-tune bottom alignment */
+    min-width: 60px;
+    /* Reduced to give more space for the logo */
+    position: relative;
+    z-index: 5;
 }
 
 .header-right {
