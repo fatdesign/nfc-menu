@@ -17,7 +17,7 @@
             "es": "Hummus con Naan"
           },
           "price": "9.50",
-          "available": true,
+          "isSoldOut": true,
           "desc": {
             "de": "Kichererbsenpüree mit Sesam-Paste, Olivenöl und frischem Fladenbrot.",
             "en": "Chickpea puree with sesame paste, olive oil and fresh flatbread.",
