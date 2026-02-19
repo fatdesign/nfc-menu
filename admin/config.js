@@ -15,5 +15,5 @@ const ADMIN_CONFIG = {
 
     // Die URL zu deinem PHP-Proxy auf deinem Server
     // Beispiel: "https://fatdesign.at/shaker-proxy/proxy.php"
-    proxyUrl: "https://fatadesign.at/shaker-proxy/proxy.php",
+    proxyUrl: "https://shaker-menu-proxy.f-klavun.workers.dev",
 };
