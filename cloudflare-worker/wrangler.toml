@@ -1,0 +1,14 @@
+name = "shaker-menu-proxy"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+# Environment variables are set in the Cloudflare Dashboard,
+# NOT here (to keep them secret).
+# Go to: Workers & Pages → your worker → Settings → Variables
+#
+# Required variables:
+#   ADMIN_PASSWORD
+#   GITHUB_TOKEN
+#   GITHUB_OWNER
+#   GITHUB_REPO
+#   ALLOWED_ORIGIN
