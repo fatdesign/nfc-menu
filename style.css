@@ -98,20 +98,20 @@ ul {
 
 /* Mobile/Desktop Visibility */
 .mobile-only {
-    display: none;
+    display: none !important;
 }
 
 .desktop-only {
-    display: block;
+    display: block !important;
 }
 
 @media (max-width: 768px) {
     .mobile-only {
-        display: flex;
+        display: flex !important;
     }
 
     .desktop-only {
-        display: none;
+        display: none !important;
     }
 
     .header-content {
