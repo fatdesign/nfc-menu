@@ -151,6 +151,7 @@
             "es": "Morgh Karahi"
           },
           "price": "14.90",
+          "available": false,
           "desc": {
             "de": "Spezialität des Hauses mit saftigem Hühnerfleisch.",
             "en": "House specialty with juicy chicken meat.",
