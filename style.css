@@ -117,16 +117,21 @@ ul {
     .header-content {
         flex-direction: row;
         justify-content: space-between;
-        align-items: center;
-        padding: 0 var(--space-s);
+        align-items: flex-end;
+        /* Align buttons/elements to bottom */
+        padding: 0 20px 8px 20px;
+        /* More side space, some bottom space */
+        height: 80px;
+        /* Fixed height to control alignment if needed */
     }
 
     .brand {
         position: absolute;
         left: 50%;
+        top: 20px;
+        /* Move logo up a bit if buttons are at bottom */
         transform: translateX(-50%);
         font-size: 1.1rem;
-        /* Slightly smaller to fit */
         white-space: nowrap;
     }
 }
@@ -149,16 +154,20 @@ ul {
 @media (max-width: 768px) {
     #mobile-menu-toggle {
         display: flex;
+        padding: 8px;
+        border: none;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
     }
 }
 
-/* Language Switcher */
 .header-left,
 .header-right {
     display: flex;
     align-items: center;
     min-width: 80px;
-    /* Ensure space for buttons */
+    padding-bottom: 2px;
+    /* Fine-tune bottom alignment */
 }
 
 .header-right {
