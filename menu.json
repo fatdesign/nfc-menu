@@ -6,13 +6,13 @@
       "items": [
         {
           "name": "Coco mit Popo",
-          "price": "45.10",
-          "desc": "KichererbsenpÃÂÃÂ¼ree mit Sesam-Paste, OlivenÃÂÃÂ¶l und frischem Fladenbrot."
+          "price": "145.10",
+          "desc": "KichererbsenpÃÂÃÂÃÂÃÂ¼ree mit Sesam-Paste, OlivenÃÂÃÂÃÂÃÂ¶l und frischem Fladenbrot."
         },
         {
           "name": "Lolo Lala",
           "price": "259.50",
-          "desc": "Knusprig gebackene Kartoffelscheiben mit wÃÂÃÂ¼rzigen GewÃÂÃÂ¼rzen."
+          "desc": "Knusprig gebackene Kartoffelscheiben mit wÃÂÃÂÃÂÃÂ¼rzigen GewÃÂÃÂÃÂÃÂ¼rzen."
         },
         {
           "name": "Fatihihihihi",
@@ -22,7 +22,7 @@
         {
           "name": "Bolani Watani Classic",
           "price": "10.90",
-          "desc": "Traditionelles Fladenbrot gefÃÂÃÂ¼llt mit Kartoffeln und KrÃÂÃÂ¤utern."
+          "desc": "Traditionelles Fladenbrot gefÃÂÃÂÃÂÃÂ¼llt mit Kartoffeln und KrÃÂÃÂÃÂÃÂ¤utern."
         },
         {
           "name": "Vegan Lentil Soup",
@@ -38,22 +38,22 @@
         {
           "name": "Chicken Karahi",
           "price": "14.90",
-          "desc": "HÃÂÃÂ¼hnerbruststÃÂÃÂ¼cke zubereitet in einer wÃÂÃÂ¼rzigen, traditionellen Sauce."
+          "desc": "HÃÂÃÂÃÂÃÂ¼hnerbruststÃÂÃÂÃÂÃÂ¼cke zubereitet in einer wÃÂÃÂÃÂÃÂ¼rzigen, traditionellen Sauce."
         },
         {
           "name": "Chicken Dupiaza",
           "price": "14.90",
-          "desc": "HÃÂÃÂ¼hnerfleisch mit viel Zwiebeln und orientalischen GewÃÂÃÂ¼rzen."
+          "desc": "HÃÂÃÂÃÂÃÂ¼hnerfleisch mit viel Zwiebeln und orientalischen GewÃÂÃÂÃÂÃÂ¼rzen."
         },
         {
           "name": "Chicken Biryani",
           "price": "14.90",
-          "desc": "WÃÂÃÂ¼rziger Safranreis mit HÃÂÃÂ¼hnerfleisch und Mandeln."
+          "desc": "WÃÂÃÂÃÂÃÂ¼rziger Safranreis mit HÃÂÃÂÃÂÃÂ¼hnerfleisch und Mandeln."
         },
         {
           "name": "Morgh Karahi",
           "price": "14.90",
-          "desc": "SpezialitÃÂÃÂ¤t des Hauses mit saftigem HÃÂÃÂ¼hnerfleisch."
+          "desc": "SpezialitÃÂÃÂÃÂÃÂ¤t des Hauses mit saftigem HÃÂÃÂÃÂÃÂ¼hnerfleisch."
         }
       ]
     },
@@ -64,7 +64,7 @@
         {
           "name": "Lamm Dupiaza",
           "price": "21.90",
-          "desc": "Zartes Lammfleisch mit Zwiebeln und feinen KrÃÂÃÂ¤utern."
+          "desc": "Zartes Lammfleisch mit Zwiebeln und feinen KrÃÂÃÂÃÂÃÂ¤utern."
         },
         {
           "name": "Lamm Qabeli Palav",
@@ -74,7 +74,7 @@
         {
           "name": "Lamm Biryani",
           "price": "23.90",
-          "desc": "Lammfleisch mit wÃÂÃÂ¼rzigem Safranreis."
+          "desc": "Lammfleisch mit wÃÂÃÂÃÂÃÂ¼rzigem Safranreis."
         }
       ]
     },
@@ -90,7 +90,7 @@
         {
           "name": "Qorme Katchalu",
           "price": "13.90",
-          "desc": "Kartoffeleintopf mit wÃÂÃÂ¼rziger Tomaten-Knoblauchsauce und Safranreis."
+          "desc": "Kartoffeleintopf mit wÃÂÃÂÃÂÃÂ¼rziger Tomaten-Knoblauchsauce und Safranreis."
         },
         {
           "name": "Lentils & Saffron",
@@ -100,23 +100,23 @@
         {
           "name": "Falafel Teller",
           "price": "9.90",
-          "desc": "5 Falafel, Hummus, eingelegtes GemÃÂÃÂ¼se & Naan."
+          "desc": "5 Falafel, Hummus, eingelegtes GemÃÂÃÂÃÂÃÂ¼se & Naan."
         }
       ]
     },
     {
       "id": "spezial",
-      "name": "SpezialitÃÂÃÂ¤ten",
+      "name": "SpezialitÃÂÃÂÃÂÃÂ¤ten",
       "items": [
         {
           "name": "Mantu Teigtaschen",
           "price": "24.90",
-          "desc": "12 hausgemachte gedÃÂÃÂ¤mpfte Teigtaschen mit wÃÂÃÂ¼rziger FleischfÃÂÃÂ¼llung und Joghurtsauce."
+          "desc": "12 hausgemachte gedÃÂÃÂÃÂÃÂ¤mpfte Teigtaschen mit wÃÂÃÂÃÂÃÂ¼rziger FleischfÃÂÃÂÃÂÃÂ¼llung und Joghurtsauce."
         },
         {
           "name": "Mix Kabab",
           "price": "17.90",
-          "desc": "Eine Auswahl unserer besten Grill-SpezialitÃÂÃÂ¤ten."
+          "desc": "Eine Auswahl unserer besten Grill-SpezialitÃÂÃÂÃÂÃÂ¤ten."
         }
       ]
     },
@@ -132,12 +132,12 @@
         {
           "name": "Hausgemachter Safrankuchen",
           "price": "4.90",
-          "desc": "SÃÂÃÂ¼ÃÂÃÂer Kuchen verfeinert mit edlem Safran."
+          "desc": "SÃÂÃÂÃÂÃÂ¼ÃÂÃÂÃÂÃÂer Kuchen verfeinert mit edlem Safran."
         },
         {
           "name": "Baklava",
           "price": "4.90",
-          "desc": "Orientalisches BlÃÂÃÂ¤tterteiggebÃÂÃÂ¤ck mit WalnÃÂÃÂ¼ssen und Pistazien."
+          "desc": "Orientalisches BlÃÂÃÂÃÂÃÂ¤tterteiggebÃÂÃÂÃÂÃÂ¤ck mit WalnÃÂÃÂÃÂÃÂ¼ssen und Pistazien."
         }
       ]
     }
