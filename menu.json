@@ -94,7 +94,7 @@
             "es": "Los la entrastros"
           },
           "price": "7.77",
-          "isSoldOut": true,
+          "isSoldOut": false,
           "desc": {
             "de": "Chicken",
             "en": "",
