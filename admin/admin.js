@@ -77,8 +77,9 @@ async function proxyRequest(method, body = null) {
 
     const res = await fetch(ADMIN_CONFIG.proxyUrl, options);
     if (!res.ok) {
-        const err = await res.json().catch(() => ({ error: `HTTP ${res.status}` }));
-        throw new Error(err.error || `HTTP ${res.status}`);
+        const err = await res.json().catch(() => ({}));
+        // We include the status code in the message for robust error handling
+        throw new Error(`${res.status}: ${err.error || 'Request failed'}`);
     }
     return res.json();
 }
@@ -95,8 +96,8 @@ async function loadMenu() {
         categoriesContainer.innerHTML = '';
         renderDashboard();
     } catch (err) {
-        // If it's an authentication error (401), don't fallback, just fail.
-        if (err.message.includes('401')) {
+        // Strictly block if the server says 401 (Unauthorized)
+        if (err.message.startsWith('401:')) {
             throw err;
         }
 
