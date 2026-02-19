@@ -10,5 +10,5 @@
 
 const ADMIN_CONFIG = {
     // Die URL zu deinem Cloudflare Worker Proxy
-    proxyUrl: "https://shaker-menu-proxy.f-klavun.workers.dev",
+    proxyUrl: "https://nfc-menu-proxy.f-klavun.workers.dev",
 };
