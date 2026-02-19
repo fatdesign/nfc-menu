@@ -4,159 +4,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin – My Restaurant</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Inter:wght@400;500;600&display=swap">
+    <title>My Restaurant | Digitale Speisekarte</title>
+    <meta name="description" content="Persische Kochkunst in Salzburg. Entdecken Sie unsere Spezialitäten digital.">
+    <!-- Favicon would go here -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- Login Screen -->
-    <div id="login-screen" class="screen active">
-        <div class="login-card">
-            <div class="login-logo">
-                <span class="gold">Chef Menü</span> ADMIN
+    <!-- Navigation Overlay / Header -->
+    <header class="main-header glass animate-fade-in">
+        <div class="container header-content">
+            <div class="brand">
+                <span class="gold-text">Chef Menü</span> RESTAURANT
             </div>
-            <p class="login-subtitle">Speisekarte verwalten</p>
-            <form id="login-form">
-                <div class="form-group">
-                    <label for="password">Passwort</label>
-                    <input type="password" id="password" placeholder="••••••••" autocomplete="current-password"
-                        required>
+            <!-- Desktop Nav -->
+            <nav class="category-nav desktop-only">
+                <ul id="category-list">
+                    <!-- Categories will be injected here -->
+                </ul>
+            </nav>
+            <!-- Mobile Menu Toggle -->
+            <div class="header-right mobile-only">
+                <div class="lang-switcher">
+                    <button class="lang-btn" data-lang="de">DE</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                    <button class="lang-btn" data-lang="tr">TR</button>
+                    <button class="lang-btn" data-lang="es">ES</button>
                 </div>
-                <button type="submit" class="btn btn-primary btn-full">Einloggen</button>
-                <p id="login-error" class="error-msg hidden">Falsches Passwort. Bitte erneut versuchen.</p>
-            </form>
+                <button id="mobile-menu-toggle" aria-label="Menu öffnen">
+                    <span class="menu-label gold-text">MENÜ</span>
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                    </div>
+                </button>
+            </div>
+            <!-- Desktop Layout also needs it but let's place it in the desktop nav or separate -->
+            <div class="desktop-only header-right-desktop">
+                <div class="lang-switcher">
+                    <button class="lang-btn" data-lang="de">DE</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                    <button class="lang-btn" data-lang="tr">TR</button>
+                    <button class="lang-btn" data-lang="es">ES</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Overlay -->
+    <div id="mobile-menu-overlay" class="mobile-only glass">
+        <button id="close-mobile-menu" aria-label="Menu schließen">✕</button>
+        <div class="mobile-nav-content">
+            <div class="mobile-brand">
+                <span class="gold-text">NFC Menü</span>
+            </div>
+            <ul id="mobile-category-list">
+                <!-- Mobile Categories will be injected here -->
+            </ul>
         </div>
     </div>
 
-    <!-- Admin Dashboard -->
-    <div id="dashboard-screen" class="screen">
-        <header class="admin-header">
-            <div class="admin-brand"><span class="gold">SHAKER</span> ADMIN</div>
-            <div class="header-actions">
-                <span id="save-status" class="save-status"></span>
-                <button id="save-btn" class="btn btn-primary">💾 Speichern</button>
-                <button id="logout-btn" class="btn btn-ghost">Abmelden</button>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero animate-fade-in">
+            <div class="hero-overlay"></div>
+            <div class="container hero-content">
+                <h1 class="hero-title">My Restaurant</h1>
+                <p class="hero-subtitle">Persische Kochkunst & Gastfreundschaft</p>
+                <div class="hero-decoration">
+                    <span class="line"></span>
+                    <span class="icon">❈</span>
+                    <span class="line"></span>
+                </div>
             </div>
-        </header>
+        </section>
 
-        <main class="admin-main">
-            <div class="admin-toolbar">
-                <h1 class="page-title">Speisekarte bearbeiten</h1>
-                <button id="add-category-btn" class="btn btn-secondary">+ Kategorie hinzufügen</button>
-            </div>
-
-            <div id="categories-container">
-                <!-- Categories rendered by JS -->
-            </div>
-        </main>
-    </div>
-
-    <!-- Modal: Add/Edit Item -->
-    <div id="item-modal" class="modal-overlay hidden">
-        <div class="modal-card modal-large">
-            <h2 class="modal-title" id="modal-title">Gericht hinzufügen</h2>
-            <form id="item-form">
-                <input type="hidden" id="item-cat-id">
-                <input type="hidden" id="item-index">
-
-                <div class="modal-grid">
-                    <div class="modal-col">
-                        <div class="lang-tag">DEUTSCH</div>
-                        <div class="form-group">
-                            <label>Name (DE)</label>
-                            <input type="text" id="item-name-de" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Beschreibung (DE)</label>
-                            <textarea id="item-desc-de" rows="2"></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-col">
-                        <div class="lang-tag">ENGLISH</div>
-                        <div class="form-group">
-                            <label>Name (EN)</label>
-                            <input type="text" id="item-name-en">
-                        </div>
-                        <div class="form-group">
-                            <label>Beschreibung (EN)</label>
-                            <textarea id="item-desc-en" rows="2"></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal-grid">
-                    <div class="modal-col">
-                        <div class="lang-tag">TÜRKÇE</div>
-                        <div class="form-group">
-                            <label>Name (TR)</label>
-                            <input type="text" id="item-name-tr">
-                        </div>
-                        <div class="form-group">
-                            <label>Beschreibung (TR)</label>
-                            <textarea id="item-desc-tr" rows="2"></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-col">
-                        <div class="lang-tag">ESPAÑOL</div>
-                        <div class="form-group">
-                            <label>Name (ES)</label>
-                            <input type="text" id="item-name-es">
-                        </div>
-                        <div class="form-group">
-                            <label>Beschreibung (ES)</label>
-                            <textarea id="item-desc-es" rows="2"></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="item-price">Preis (€)</label>
-                    <input type="text" id="item-price" placeholder="z.B. 14.90" required>
-                </div>
-
-                <div class="modal-actions">
-                    <button type="button" id="modal-cancel" class="btn btn-ghost">Abbrechen</button>
-                    <button type="submit" class="btn btn-primary">Speichern</button>
-                </div>
-            </form>
+        <!-- Menu Container -->
+        <div id="menu-app" class="container section-padding">
+            <!-- Categories and Items will be dynamically rendered or structured here -->
         </div>
-    </div>
+    </main>
 
-    <!-- Modal: Add Category -->
-    <div id="cat-modal" class="modal-overlay hidden">
-        <div class="modal-card">
-            <h2 class="modal-title">Kategorie hinzufügen</h2>
-            <form id="cat-form">
-                <div class="form-group">
-                    <label>Kategoriename (DE)</label>
-                    <input type="text" id="cat-name-de" required>
-                </div>
-                <div class="form-group">
-                    <label>Kategoriename (EN)</label>
-                    <input type="text" id="cat-name-en">
-                </div>
-                <div class="form-group">
-                    <label>Kategoriename (TR)</label>
-                    <input type="text" id="cat-name-tr">
-                </div>
-                <div class="form-group">
-                    <label>Kategoriename (ES)</label>
-                    <input type="text" id="cat-name-es">
-                </div>
-                <div class="modal-actions">
-                    <button type="button" id="cat-modal-cancel" class="btn btn-ghost">Abbrechen</button>
-                    <button type="submit" class="btn btn-primary">Hinzufügen</button>
-                </div>
-            </form>
+    <footer class="glass">
+        <div class="container footer-content">
+            <p>&copy; 2026 My Restaurant Salzburg</p>
+            <p class="nfc-tagline">Scan via NFC for the digital menu</p>
         </div>
-    </div>
+    </footer>
 
-    <script src="config.js"></script>
-    <script src="admin.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

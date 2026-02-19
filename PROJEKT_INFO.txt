@@ -1,0 +1,71 @@
+==================================================
+   SHAKER DIGITAL MENU - ARCHITEKTUR & SETUP
+==================================================
+
+Dieses Projekt besteht aus drei Hauptteilen, die sicher miteinander kommunizieren:
+
+1. FRONTEND (Die Website)
+--------------------------
+Hosted auf: GitHub Pages (Öffentliches Repo)
+Dateien: index.html, style.css, script.js, menu.json
+Logik: Die Website lädt die 'menu.json' und zeigt die Gerichte an. 
+
+2. ADMIN-PANEL (Die Verwaltung)
+--------------------------------
+Ordner: /admin
+Dateien: index.html, style.css, admin.js, config.js
+Logik: 
+- Passwort-Eingabe beim Login.
+- Passwort wird NICHT gespeichert, sondern live an Cloudflare geschickt.
+- Änderungen werden an den Cloudflare Worker gesendet.
+
+3. SECURITY-LAYER (Der Cloudflare Worker)
+------------------------------------------
+Hosted auf: Cloudflare (Kostenlos)
+Datei: cloudflare-worker/worker.js
+Funktion: 
+- Der Worker ist die einzige Stelle, die deinen GITHUB_TOKEN kennt.
+- Er prüft, ob das X-Admin-Password korrekt ist.
+- Wenn ja, speichert er die neue menu.json direkt in dein GitHub Repo.
+
+==================================================
+WIE ALLES VERBUNDEN IST (DER FLOW)
+==================================================
+
+[Admin Browser] 
+      |
+      |-- Schickt Passwort & Daten --> [Cloudflare Worker]
+                                             |
+                                             |-- Prüft Passwort (Env Var)
+                                             |-- Nutzt Token (Env Var)
+                                             |-- Speichert Datei --> [GitHub Repo]
+                                                                         |
+                                                                         |-- GitHub Pages aktualisiert sich (30s)
+                                                                         |-- [Gäste sehen neue Karte]
+
+==================================================
+WO TESTE / ÄNDERE ICH WAS?
+==================================================
+
+A) PASSWORT & GITHUB TOKEN ÄNDERN:
+   - Geh auf cloudflare.com -> Workers -> nfc-menu-proxy
+   - Settings -> Variables
+   - Hier kannst du ADMIN_PASSWORD oder GITHUB_TOKEN anpassen.
+
+B) WORKER-URL ÄNDERN:
+   - In der Datei 'admin/config.js' steht die 'proxyUrl'.
+   - Wenn du einen neuen Worker erstellst, trage die neue URL dort ein.
+
+C) DER GITHUB TOKEN (Classic):
+   - Wenn der Token abläuft, erstelle einen neuen "Classic Token" auf GitHub.
+   - Haken bei: [repo]
+   - Expiration: [No expiration]
+   - Kopiere ihn in die Cloudflare Variables (GITHUB_TOKEN).
+
+==================================================
+SICHERHEITS-CHECK:
+==================================================
+- Dein GitHub Repo kann "Public" sein (gratis). 
+- In 'admin/config.js' steht KEIN Token und KEIN Passwort.
+- Niemand kann über F12 dein Passwort oder deinen Token stehlen.
+==================================================

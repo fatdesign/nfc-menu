@@ -1,0 +1,48 @@
+==================================================
+   VERTRIEBS-SCRIPT: DIE SMARTE SPEISEKARTE
+==================================================
+
+Dieses Script hilft dir, das Projekt professionell vorzustellen. Am besten suchst du dir eine ruhige Zeit aus (z.B. 10:30 Uhr oder 15:30 Uhr), wenn der Wirt Zeit zum Reden hat.
+
+--------------------------------------------------
+1. DER EINSTIEG (DER "EYE-CATCHER")
+--------------------------------------------------
+Du: "Guten Tag! Darf ich Ihnen kurz zeigen, wie Ihre Gäste in Zukunft die Speisekarte aufrufen, ohne dass Sie eine einzige Seite Papier drucken müssen?"
+
+(Leg deinen NFC-Tag auf den Tisch und halte dein Handy kurz drüber)
+
+Du: "Schauen Sie mal – nur kurz antippen, und die komplette Karte öffnet sich auf dem Handy Ihres Gastes. Kein QR-Code-Gefummel, keine App, kein Warten."
+
+--------------------------------------------------
+2. DAS PROBLEM LÖSEN (PAIN POINTS)
+--------------------------------------------------
+Du: "Wie oft ändern sich bei Ihnen die Preise oder Gerichte? Einmal im Monat? Jede Woche?"
+
+Der Wirt: "Ja, ständig, und dann müssen wir immer neue Einleger drucken..."
+
+Du: "Genau das lösen wir. Mit meiner Lösung können Sie am Handy – während Sie hier stehen – ein Gericht auf 'Ausverkauft' setzen oder einen Preis ändern. In 10 Sekunden ist das für alle Gäste live."
+
+--------------------------------------------------
+3. DIE HIGHLIGHTS (DIFFERENZIERUNG)
+--------------------------------------------------
+- "Es ist mehrsprachig: Ein Klick und die Karte ist auf Englisch, Türkisch oder Spanisch. Perfekt für Touristen."
+- "Es gibt KEIN Abo: Die meisten Anbieter wollen 50€ im Monat. Bei mir zahlen Sie einmal für die Einrichtung, und das System gehört Ihnen für immer."
+- "Es ist hygienisch: Keine zerfledderten oder klebrigen Karten mehr auf den Tischen."
+
+--------------------------------------------------
+4. DER ABSCHLUSS (PRICING & NEXT STEPS)
+--------------------------------------------------
+Du: "Ich biete Ihnen ein Komplett-Paket an:
+1. Erstellung Ihrer digitalen Karte (inkl. Fotos und Logo).
+2. Einrichtung des Admin-Zugangs für Ihr Handy.
+3. 10 hochwertige NFC-Tags/Aufsteller für Ihre Tische.
+
+Das Ganze kostet einmalig ca. 350 € (vHB). Danach haben Sie keine laufenden Kosten mehr für die Software. Wäre das für Sie interessant, mal eine Woche lang an zwei Tischen zu testen?"
+
+--------------------------------------------------
+PROFI-TIPPS FÜR DEN VERKAUF:
+--------------------------------------------------
+- ZEIGEN statt REDEN: Die Demo auf dem Handy ist dein stärkstes Argument.
+- DER ADMIN-TRICK: Öffne das Admin-Panel vor seinen Augen, ändere den Namen einer Cola in 'SUPER COLA' und zeig ihm, wie es auf der Karte sofort erscheint. Das überzeugt jeden Wirt.
+- VERTRAUEN: Sag ihm: "Ich mache das lokal hier in der Stadt. Wenn was ist, bin ich Ihr Ansprechpartner."
+==================================================
